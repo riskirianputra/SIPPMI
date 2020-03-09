@@ -185,11 +185,11 @@
             </li>
         @endcan
 
-        @can('review')
+        @can('reviewer_view')
             <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <span class="c-sidebar-nav-icon">
                     <i class="cil-3d"></i>
-                </span>Review Usulan
+                </span>Manajemen Review
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
                     @can('reviewer_view')
