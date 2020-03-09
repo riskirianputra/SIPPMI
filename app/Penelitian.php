@@ -33,6 +33,7 @@ class Penelitian extends Model
         'id',
         'judul',
         'biaya',
+        'biaya_final',
         'skema_id',
         'prodi_id',
         'fokus_id',

@@ -22,7 +22,7 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-RefSkema">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-RefSkema" style="width: 100%">
                 <thead>
                     <tr>
                         <th width="10">

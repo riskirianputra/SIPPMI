@@ -1,8 +1,103 @@
-/* global Chart, coreui, coreui.Utils.getStyle */
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./resources/js/coreui/widgets.js":
+/*!****************************************!*\
+  !*** ./resources/js/coreui/widgets.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* global Chart, coreui, getStyle */
 
 /**
  * --------------------------------------------------------------------------
- * CoreUI Boostrap Admin Template (v3.0.0): main.js
+ * CoreUI Free Boostrap Admin Template (v3.0.0-alpha.1): main.js
  * Licensed under MIT (https://coreui.io/license)
  * --------------------------------------------------------------------------
  */
@@ -13,15 +108,15 @@ Chart.defaults.global.pointHitDetectionRadius = 1;
 Chart.defaults.global.tooltips.enabled = false;
 Chart.defaults.global.tooltips.mode = 'index';
 Chart.defaults.global.tooltips.position = 'nearest';
-Chart.defaults.global.tooltips.custom = coreui.ChartJS.customTooltips;
+Chart.defaults.global.tooltips.custom = coreui.ChartJS.CustomTooltips;
 document.body.addEventListener('classtoggle', function (event) {
   if (event.detail.className === 'c-dark-theme') {
     if (document.body.classList.contains('c-dark-theme')) {
-      cardChart1.data.datasets[0].pointBackgroundColor = coreui.Utils.getStyle('--primary-dark-theme');
-      cardChart2.data.datasets[0].pointBackgroundColor = coreui.Utils.getStyle('--info-dark-theme');
+      cardChart1.data.datasets[0].pointBackgroundColor = getStyle('--primary-dark-theme');
+      cardChart2.data.datasets[0].pointBackgroundColor = getStyle('--info-dark-theme');
     } else {
-      cardChart1.data.datasets[0].pointBackgroundColor = coreui.Utils.getStyle('--primary');
-      cardChart2.data.datasets[0].pointBackgroundColor = coreui.Utils.getStyle('--info');
+      cardChart1.data.datasets[0].pointBackgroundColor = getStyle('--primary');
+      cardChart2.data.datasets[0].pointBackgroundColor = getStyle('--info');
     }
 
     cardChart1.update();
@@ -37,7 +132,7 @@ var cardChart1 = new Chart(document.getElementById('card-chart1'), {
       label: 'My First dataset',
       backgroundColor: 'transparent',
       borderColor: 'rgba(255,255,255,.55)',
-      pointBackgroundColor: coreui.Utils.getStyle('--primary'),
+      pointBackgroundColor: getStyle('--primary'),
       data: [65, 59, 84, 84, 51, 55, 40]
     }]
   },
@@ -87,7 +182,7 @@ var cardChart2 = new Chart(document.getElementById('card-chart2'), {
       label: 'My First dataset',
       backgroundColor: 'transparent',
       borderColor: 'rgba(255,255,255,.55)',
-      pointBackgroundColor: coreui.Utils.getStyle('--info'),
+      pointBackgroundColor: getStyle('--info'),
       data: [1, 18, 9, 17, 34, 22, 11]
     }]
   },
@@ -175,8 +270,7 @@ var cardChart4 = new Chart(document.getElementById('card-chart4'), {
       label: 'My First dataset',
       backgroundColor: 'rgba(255,255,255,.2)',
       borderColor: 'rgba(255,255,255,.55)',
-      data: [78, 81, 80, 45, 34, 12, 40, 85, 65, 23, 12, 98, 34, 84, 67, 82],
-      barPercentage: 0.6
+      data: [78, 81, 80, 45, 34, 12, 40, 85, 65, 23, 12, 98, 34, 84, 67, 82]
     }]
   },
   options: {
@@ -186,7 +280,8 @@ var cardChart4 = new Chart(document.getElementById('card-chart4'), {
     },
     scales: {
       xAxes: [{
-        display: false
+        display: false,
+        barPercentage: 0.6
       }],
       yAxes: [{
         display: false
@@ -205,7 +300,7 @@ var sparklineChart1 = new Chart(document.getElementById('sparkline-chart-1'), {
   data: {
     labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M'],
     datasets: [{
-      backgroundColor: coreui.Utils.getStyle('--primary'),
+      backgroundColor: getStyle('--primary'),
       borderColor: 'transparent',
       borderWidth: 1,
       data: [random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100)]
@@ -232,7 +327,7 @@ var sparklineChart2 = new Chart(document.getElementById('sparkline-chart-2'), {
   data: {
     labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M'],
     datasets: [{
-      backgroundColor: coreui.Utils.getStyle('--warning'),
+      backgroundColor: getStyle('--warning'),
       borderColor: 'transparent',
       borderWidth: 1,
       data: [random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100)]
@@ -259,7 +354,7 @@ var sparklineChart3 = new Chart(document.getElementById('sparkline-chart-3'), {
   data: {
     labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M'],
     datasets: [{
-      backgroundColor: coreui.Utils.getStyle('--success'),
+      backgroundColor: getStyle('--success'),
       borderColor: 'transparent',
       borderWidth: 1,
       data: [random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100)]
@@ -287,7 +382,7 @@ var sparklineChart4 = new Chart(document.getElementById('sparkline-chart-4'), {
     labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
     datasets: [{
       backgroundColor: 'transparent',
-      borderColor: coreui.Utils.getStyle('--info'),
+      borderColor: getStyle('--info'),
       borderWidth: 2,
       data: [random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100)]
     }]
@@ -319,7 +414,7 @@ var sparklineChart5 = new Chart(document.getElementById('sparkline-chart-5'), {
     labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
     datasets: [{
       backgroundColor: 'transparent',
-      borderColor: coreui.Utils.getStyle('--success'),
+      borderColor: getStyle('--success'),
       borderWidth: 2,
       data: [random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100)]
     }]
@@ -351,7 +446,7 @@ var sparklineChart6 = new Chart(document.getElementById('sparkline-chart-6'), {
     labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
     datasets: [{
       backgroundColor: 'transparent',
-      borderColor: coreui.Utils.getStyle('--danger'),
+      borderColor: getStyle('--danger'),
       borderWidth: 2,
       data: [random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100), random(40, 100)]
     }]
@@ -445,4 +540,19 @@ var brandBoxChart3 = new Chart(document.getElementById('social-box-chart-3'), {
   },
   options: brandBoxChartOptions
 });
-//# sourceMappingURL=widgets.js.map
+
+/***/ }),
+
+/***/ 3:
+/*!**********************************************!*\
+  !*** multi ./resources/js/coreui/widgets.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! D:\WebApps\laravel-coreui3\resources\js\coreui\widgets.js */"./resources/js/coreui/widgets.js");
+
+
+/***/ })
+
+/******/ });

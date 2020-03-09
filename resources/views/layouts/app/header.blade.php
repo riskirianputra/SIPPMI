@@ -28,7 +28,7 @@
                 <div class="dropdown-header bg-light py-2">
                     <strong>Settings</strong>
                 </div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ route('profil.index') }}">
                     <span class="c-icon mfe-2">
                         <i class="cil-user"></i>
                     </span> Profile

@@ -27,17 +27,7 @@ class Pengabdian extends Model
         'deleted_at',
     ];
 
-    protected $appends = [
-        'file_logbook',
-        'file_cv',
-        'file_pengesahan',
-        'file_proposal',
-        'file_laporan_akhir',
-        'file_laporan_kemajuan',
-        'file_laporan_keuangan',
-        'file_profile_pengabdian',
-        'file_lembaran_pengesahan',
-    ];
+
 
     protected $fillable = [
         'id',
@@ -57,10 +47,10 @@ class Pengabdian extends Model
         'ringkasan_eksekutif',
     ];
 
-//    public function registerMediaConversions(Media $media = null)
-//    {
-//        $this->addMediaConversion('thumb')->width(50)->height(50);
-//    }
+    public function anggotas()
+    {
+        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id');
+    }
 
     public function usulan()
     {

@@ -19,92 +19,112 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Pengabdian">
+            <table class="table table-striped table-hover datatable datatable-Pengabdian" style="width: 100%">
                 <thead>
-                    <tr>
-                        <th width="10">
+                <tr>
+                    <th width="10">
 
-                        </th>
-                        <th>
-                            {{ trans('cruds.pengabdian.fields.judul') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.pengabdian.fields.mitra_pengabdian') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.pengabdian.fields.skema') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.pengabdian.fields.prodi') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.pengabdian.fields.status_pengabdian') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.pengabdian.fields.biaya') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.pengabdian.fields.file_proposal') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.pengabdian.fields.file_profile_pengabdian') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
+                    </th>
+                    <th>
+                        Peneliti
+                    </th>
+                    <th class="text-center">
+                        {{ trans('cruds.pengabdian.fields.judul') }}
+                        ( {{ trans('cruds.pengabdian.fields.skema') }} )
+                    </th>
+                    <th class="text-center">
+                        {{ trans('cruds.pengabdian.fields.biaya') }}
+                    </th>
+                    <th class="text-center">
+                        Proposal
+                    </th>
+                    <th class="text-center">
+                        CV
+                    </th>
+                    <th class="text-center">
+                        Lembaran<br>Pengesahan
+                    </th>
+                    <th class="text-center">
+                        Status<br>Pengabdian
+                    </th>
+                    <th class="text-center">
+                        &nbsp;Aksi
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach($pengabdians as $key => $pengabdian)
-                        <tr data-entry-id="{{ $pengabdian->id }}">
-                            <td>
+                @foreach($pengabdians as $key => $pengabdian)
+                    <tr data-entry-id="{{ $pengabdian->id }}" @if($pengabdian->hasKomentar())class="bg-warning" @endif>
+                        <td>
 
-                            </td>
-                            <td>
-                                {{ $pengabdian->judul ?? '' }}
-                            </td>
-                            <td>
-                                {{ $pengabdian->mitra_pengabdian ?? '' }}
-                            </td>
-                            <td>
-                                {{ $pengabdian->skema->nama ?? '' }}
-                            </td>
-                            <td>
-                                {{ $pengabdian->prodi->nama ?? '' }}
-                            </td>
-                            <td>
-                                {{ $pengabdian->status_pengabdian ?? '' }}
-                            </td>
-                            <td>
-                                {{ $pengabdian->biaya ?? '' }}
-                            </td>
-                            <td>
-                                @if($pengabdian->file_proposal)
-                                    <a href="{{ $pengabdian->file_proposal->getUrl() }}" target="_blank">
-                                        {{ trans('global.view_file') }}
-                                    </a>
+                        </td>
+                        <td>
+
+                            @foreach($pengabdian->anggotas as $anggota)
+                                @if($anggota->jabatan == 1)
+                                    <strong>{{ $anggota->nama }} <small>({{ $anggota->nidn }})</small></strong> <br>
+                                    <br>
+                                @else
+                                    {{ $anggota->nama }} <small>({{ $anggota->nidn }})</small><br>
                                 @endif
-                            </td>
-                            <td>
-                                @if($pengabdian->file_profile_pengabdian)
-                                    <a href="{{ $pengabdian->file_profile_pengabdian->getUrl() }}" target="_blank">
-                                        {{ trans('global.view_file') }}
-                                    </a>
-                                @endif
-                            </td>
-                            <td>
-                                @can('pengabdian_view')
-                                    {!! cui_btn_view(route('admin.pengabdians.show', [$pengabdian->id])) !!}
-                                @endcan
+                            @endforeach
 
-                                @can('pengabdian_manage')
-                                    {!! cui_btn_edit(route('admin.pengabdians.edit', [$pengabdian->id])) !!}
-                                    {!! cui_btn_delete(route('admin.pengabdians.destroy', [$pengabdian->id]), "Anda yakin akan menghapus data Pengabdian ini?") !!}
-                                @endcan
-                            </td>
+                        </td>
+                        <td>
+                            {!! $pengabdian->judulSimple ?? '' !!}
+                            <br>
+                            <span class="text-info">
+                                    <small><em>{{ $pengabdian->skema->nama ?? '' }}</em></small>
+                                </span>
+                            <br>
+                            @if($pengabdian->hasKomentar())
+                                <i class="cil-warning text-warning"></i>
+                            @endif
+                        </td>
+                        <td class="text-right">
+                            {{ number_format($pengabdian->biaya,0, ',', '.').',-' ?? '' }}
+                        </td>
+                        <td class="text-center">
+                            @if(!empty($pengabdian->file_proposal))
+                                <a href="{{ $pengabdian->getFileProposalPath() }}" target="_blank">
+                                    <i class="fa fa-file-pdf-o text-danger"></i>
+                                </a>
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            @if(!empty($pengabdian->file_cv))
+                                <a href="{{ $pengabdian->getFileCvPath() }}" target="_blank">
+                                    <i class="fa fa-file-pdf-o text-danger"></i>
+                                </a>
+                            @endif
 
-                        </tr>
-                    @endforeach
+                        </td>
+                        <td class="text-center">
+                            @if(!empty($pengabdian->file_pengesahan))
+                                <a href="{{ $pengabdian->getFilePengesahanPath() }}" target="_blank">
+                                    <i class="fa fa-file-pdf-o text-danger"></i>
+                                </a>
+                            @endif
+
+                        </td>
+                        <td class="text-center">
+                            <h5>
+                                    <span class="badge badge-{!! $pengabdian->statusTextColor !!}">
+                                       {{ $pengabdian->statusText }}
+                                    </span>
+                            </h5>
+
+                        </td>
+                        <td class="text-center">
+                            {!! cui()->btn_view(route('admin.pengabdians.show', $pengabdian->id)) !!}
+                            @if($pengabdian->owner == auth()->user()->id)
+                                {!! cui()->btn_edit(route('admin.pengabdians.edit', $pengabdian->id)) !!}
+                                {!! cui()->btn_delete(route('admin.pengabdians.destroy', $pengabdian->id), trans('global.areYouSure')) !!}
+                            @endif
+                        </td>
+
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -115,16 +135,16 @@
 
 @endsection
 @section('scripts')
-@parent
-<script>
-    $(function () {
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('pengabdian_manage')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
-  let deleteButton = {
-    text: deleteButtonTrans,
-    url: "{{ route('admin.pengabdians.massDestroy') }}",
-    className: 'btn-danger',
+    @parent
+    <script>
+        $(function () {
+            let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+                @can('pengabdian_manage')
+            let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
+            let deleteButton = {
+                text: deleteButtonTrans,
+                url: "{{ route('admin.pengabdians.massDestroy') }}",
+                className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
           return $(entry).data('entry-id')

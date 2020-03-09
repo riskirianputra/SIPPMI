@@ -20,11 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PengabdianController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         abort_if(Gate::denies('pengabdian_user_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -38,11 +34,7 @@ class PengabdianController extends Controller
         return view('pengabdians.index', compact('pengabdians'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         abort_if(Gate::denies('penelitian_user_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -65,12 +57,7 @@ class PengabdianController extends Controller
         return view('pengabdians.create', compact('skemas', 'kode_rumpuns', 'prodis'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(StorePengabdianRequest $request)
     {
         abort_if(Gate::denies('pengabdian_user_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -158,12 +145,7 @@ class PengabdianController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Pengabdian $pengabdian)
     {
         abort_if(Gate::denies('pengabdian_user_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -173,12 +155,7 @@ class PengabdianController extends Controller
         return view('pengabdians.show', compact('pengabdian'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Pengabdian $pengabdian)
     {
         abort_if(Gate::denies('pengabdian_user_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -205,13 +182,7 @@ class PengabdianController extends Controller
         return view('pengabdians.edit', compact('skemas', 'kode_rumpuns', 'prodis', 'pengabdian'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(UpdatePengabdianRequest $request, Pengabdian $pengabdian)
     {
         abort_if(Gate::denies('pengabdian_user_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');

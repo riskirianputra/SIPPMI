@@ -25,27 +25,27 @@
     <span class="help-block">{{ trans('cruds.pengabdian.fields.skema_helper') }}</span>
 </div>
 
-<div class="form-group">
-    <label for="kode_rumpun_id">{{ trans('cruds.pengabdian.fields.kode_rumpun') }}</label>
-    {{ html()->select('kode_rumpun_id', $kode_rumpuns)->id('kode_rumpun_id')->class(['form-control', 'select2', 'is-invalid' => $errors->has('kode_rumpun')]) }}
-    @if($errors->has('kode_rumpun_id'))
-        <div class="invalid-feedback">
-            {{ $errors->first('kode_rumpun_id') }}
-        </div>
-    @endif
-    <span class="help-block">{{ trans('cruds.pengabdian.fields.kode_rumpun_helper') }}</span>
-</div>
+{{--<div class="form-group">--}}
+{{--    <label for="kode_rumpun_id">{{ trans('cruds.pengabdian.fields.kode_rumpun') }}</label>--}}
+{{--    {{ html()->select('kode_rumpun_id', $kode_rumpuns)->id('kode_rumpun_id')->class(['form-control', 'select2', 'is-invalid' => $errors->has('kode_rumpun')]) }}--}}
+{{--    @if($errors->has('kode_rumpun_id'))--}}
+{{--        <div class="invalid-feedback">--}}
+{{--            {{ $errors->first('kode_rumpun_id') }}--}}
+{{--        </div>--}}
+{{--    @endif--}}
+{{--    <span class="help-block">{{ trans('cruds.pengabdian.fields.kode_rumpun_helper') }}</span>--}}
+{{--</div>--}}
 
-<div class="form-group">
-    <label class="required" for="prodi_id">{{ trans('cruds.pengabdian.fields.prodi') }}</label>
-    {{ html()->select('prodi_id', $prodis)->id('prodi_id')->class(['form-control', 'select2', 'is-invalid' => $errors->has('prodi')]) }}
-    @if($errors->has('prodi_id'))
-        <div class="invalid-feedback">
-            {{ $errors->first('prodi_id') }}
-        </div>
-    @endif
-    <span class="help-block">{{ trans('cruds.pengabdian.fields.prodi_helper') }}</span>
-</div>
+{{--<div class="form-group">--}}
+{{--    <label class="required" for="prodi_id">{{ trans('cruds.pengabdian.fields.prodi') }}</label>--}}
+{{--    {{ html()->select('prodi_id', $prodis)->id('prodi_id')->class(['form-control', 'select2', 'is-invalid' => $errors->has('prodi')]) }}--}}
+{{--    @if($errors->has('prodi_id'))--}}
+{{--        <div class="invalid-feedback">--}}
+{{--            {{ $errors->first('prodi_id') }}--}}
+{{--        </div>--}}
+{{--    @endif--}}
+{{--    <span class="help-block">{{ trans('cruds.pengabdian.fields.prodi_helper') }}</span>--}}
+{{--</div>--}}
 
 <div class="form-group">
     <label for="mitra_pengabdian">{{ trans('cruds.pengabdian.fields.mitra_pengabdian') }}</label>

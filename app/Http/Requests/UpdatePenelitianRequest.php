@@ -22,7 +22,7 @@ class UpdatePenelitianRequest extends FormRequest
         $skema = RefSkema::findOrFail(request()->get('skema_id'));
         return [
             'judul'    => ['required',],
-            'prodi_id' => ['required','integer',],
+//            'prodi_id' => ['required','integer',],
             'fokus_id' => ['required','integer',],
             'skema_id' => ['required'],
             'biaya'    => ['required','integer','min:'.$skema->biaya_minimal,'max:'.$skema->biaya_maksimal],

@@ -32,7 +32,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover datatable datatable-Penelitian">
+                <table class="table table-striped table-hover datatable datatable-Penelitian" style="width: 100%">
                     <thead>
                     <tr>
                         <th width="10">
