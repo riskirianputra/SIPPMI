@@ -23,14 +23,6 @@ class ProfilController extends Controller
         return view('profil.index', compact('user'));
     }
 
-    public function create()
-    {
-    }
-
-    public function store(StoreUserRequest $request)
-    {
-    }
-
     public function edit(User $user)
     {
     }
@@ -49,15 +41,4 @@ class ProfilController extends Controller
         return redirect()->route('profil.index');
     }
 
-    public function show(User $user)
-    {
-    }
-
-    public function destroy(User $user)
-    {
-    }
-
-    public function massDestroy(MassDestroyUserRequest $request)
-    {
-    }
 }

@@ -25,7 +25,7 @@
                             {{ trans('cruds.dosen.fields.nama') }}
                         </th>
                         <td>
-                            {{ $user->dosen->nama }}
+                            {{ optional($user->dosen)->nama }}
                         </td>
                     </tr>
                     <tr>
@@ -33,7 +33,7 @@
                             {{ trans('cruds.dosen.fields.prodi') }}
                         </th>
                         <td>
-                            {{ optional($user->dosen->prodi)->nama }}
+                            {{ optional(optional($user->dosen)->prodi)->nama }}
                         </td>
                     </tr>
                     <tr>
@@ -42,7 +42,7 @@
                         </th>
                         <td>
 
-                            <input class="form-control {{ $errors->has('nip') ? 'is-invalid' : '' }}" type="text" name="nip" id="nip" value="{{ old('nip', $user->dosen->nip) }}">
+                            <input class="form-control {{ $errors->has('nip') ? 'is-invalid' : '' }}" type="text" name="nip" id="nip" value="{{ old('nip', optional($user->dosen)->nip) }}">
 
                             @if($errors->has('nip'))
                                 <div class="invalid-feedback">
@@ -51,7 +51,7 @@
                             @endif
 
                             <span class="help-block">{{ trans('cruds.dosen.fields.nip_helper') }}</span>
-                            <!-- {{ $user->dosen->nip }} -->
+                            <!-- {{ optional($user->dosen)->nip }} -->
 
                         </td>
                     </tr>
@@ -60,7 +60,7 @@
                             {{ trans('cruds.dosen.fields.nidn') }}
                         </th>
                         <td>
-                            {{ $user->dosen->nidn }}
+                            {{ optional($user->dosen)->nidn }}
                         </td>
                     </tr>
                     <tr>
@@ -69,14 +69,14 @@
                         </th>
                         <td>
 
-                            <input class="form-control {{ $errors->has('tempat_lahir') ? 'is-invalid' : '' }}" type="text" name="tempat_lahir" id="tempat_lahir" value="{{ old('tempat_lahir', $user->dosen->tempat_lahir) }}">
+                            <input class="form-control {{ $errors->has('tempat_lahir') ? 'is-invalid' : '' }}" type="text" name="tempat_lahir" id="tempat_lahir" value="{{ old('tempat_lahir', optional($user->dosen)->tempat_lahir) }}">
                             @if($errors->has('tempat_lahir'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('tempat_lahir') }}
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.dosen.fields.tempat_lahir_helper') }}</span>
-                            <!-- {{ $user->dosen->tempat_lahir }} -->
+                            <!-- {{ optional($user->dosen)->tempat_lahir }} -->
 
                         </td>
                     </tr>
@@ -87,14 +87,14 @@
                         <td>
 
                             <input class="form-control datepicker {{ $errors->has('tanggal_lahir') ? 'is-invalid' : '' }}" type="date" name="tanggal_lahir" id="tanggal_lahir"
-                             value="{{ old('tanggal_lahir', $user->dosen->tanggal_lahir) }}" placeholder="yyyy-mm-dd">
+                             value="{{ old('tanggal_lahir', optional($user->dosen)->tanggal_lahir) }}" placeholder="yyyy-mm-dd">
                             @if($errors->has('tanggal_lahir'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('tanggal_lahir') }}
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.dosen.fields.tanggal_lahir_helper') }}</span>
-                            <!-- {{ $user->dosen->tanggal_lahir }} -->
+                            <!-- {{ optional($user->dosen)->tanggal_lahir }} -->
 
                         </td>
                     </tr>
@@ -103,7 +103,7 @@
                             {{ trans('cruds.dosen.fields.jabatan_fungsional') }}
                         </th>
                         <td>
-                            {{ App\Dosen::JABATAN_FUNGSIONAL_SELECT[$user->dosen->jabatan_fungsional] ?? '' }}
+                            {{ App\Dosen::JABATAN_FUNGSIONAL_SELECT[optional($user->dosen)->jabatan_fungsional] ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -112,7 +112,7 @@
                         </th>
                         <td>
 
-                            <!-- {{ $user->dosen->status }} -->
+                            <!-- {{ optional($user->dosen)->status }} -->
 
                         </td>
                     </tr>
@@ -122,14 +122,14 @@
                         </th>
                         <td>
 
-                            <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="text" name="email" id="email" value="{{ old('email', $user->dosen->email) }}">
+                            <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="text" name="email" id="email" value="{{ old('email', optional($user->dosen)->email) }}">
                             @if($errors->has('email'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('email') }}
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.dosen.fields.email_helper') }}</span>
-                            <!-- {{ $user->dosen->email }} -->
+                            <!-- {{ optional($user->dosen)->email }} -->
 
                         </td>
                     </tr>
@@ -138,7 +138,7 @@
                             {{ trans('cruds.dosen.fields.pangkat_golongan') }}
                         </th>
                         <td>
-                            {{ $user->dosen->pangkat_golongan }}
+                            {{ optional($user->dosen)->pangkat_golongan }}
                         </td>
                     </tr>
                     <tr>
@@ -147,14 +147,14 @@
                         </th>
                         <td>
 
-                            <input class="form-control {{ $errors->has('telepon') ? 'is-invalid' : '' }}" type="text" name="telepon" id="telepon" value="{{ old('telepon', $user->dosen->telepon) }}">
+                            <input class="form-control {{ $errors->has('telepon') ? 'is-invalid' : '' }}" type="text" name="telepon" id="telepon" value="{{ old('telepon', optional($user->dosen)->telepon) }}">
                             @if($errors->has('telepon'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('telepon') }}
                                 </div>
                             @endif
                             <span class="help-block">{{ trans('cruds.dosen.fields.telepon_helper') }}</span>
-                            <!-- {{ $user->dosen->telepon }} -->
+                            <!-- {{ optional($user->dosen)->telepon }} -->
                         </td>
                     </tr>
                     <tr>

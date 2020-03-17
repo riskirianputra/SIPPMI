@@ -33,10 +33,10 @@
                         <i class="cil-user"></i>
                     </span> Profile
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ route('password.edit') }}">
                     <span class="c-icon mfe-2">
-                        <i class="cil-settings"></i>
-                    </span> Settings
+                        <i class="cil-lock-locked"></i>
+                    </span> Ubah Password
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">

@@ -84,6 +84,10 @@
 <script src="{{ asset('js/quill.min.js') }}"></script>
 
 <script>
+    $(document).ready(function () {
+        window._token = $('meta[name="csrf-token"]').attr('content')
+    });
+
     $(function() {
         let copyButtonTrans = '{{ trans('global.datatables.copy') }}'
         let csvButtonTrans = '{{ trans('global.datatables.csv') }}'
