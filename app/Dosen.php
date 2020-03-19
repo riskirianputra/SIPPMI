@@ -90,6 +90,11 @@ class Dosen extends Model
         return $this->belongsTo(Prodi::class, 'prodi_id');
     }
 
+    public function skemas()
+    {
+        return $this->belongsToMany(RefSkema::class, DosenSkema::class, 'dosen_id', 'ref_skema_id');
+    }
+
     public function getTanggalLahirAttribute($value)
     {
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;

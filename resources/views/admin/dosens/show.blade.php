@@ -8,6 +8,7 @@
 @stop
 @section('toolbar')
     @can('dosen_manage')
+        {!! cui_toolbar_btn(route('admin.dosens.skemas.create', [$dosen->id]), 'cil-pencil', 'Skema Penelitian') !!}
         {!! cui_toolbar_btn(route('admin.dosens.create'), 'icon-plus', trans('global.add').' '.trans('cruds.dosen.title_singular') ) !!}
         {!! cui_toolbar_btn(route('admin.dosens.edit',[$dosen->id]), 'icon-pencil', trans('global.edit').' '.trans('cruds.dosen.title_singular') ) !!}
         {!! cui_toolbar_btn(route('admin.dosens.destroy',[$dosen->id]), 'icon-trash', trans('global.delete').' '.trans('cruds.dosen.title_singular') ) !!}

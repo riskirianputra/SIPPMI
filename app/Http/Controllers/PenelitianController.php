@@ -41,11 +41,21 @@ class PenelitianController extends Controller
     {
         abort_if(Gate::denies('penelitian_user_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $skemas = RefSkema::where('jenis_usulan', Usulan::PENELITIAN)
-            ->whereAvailable()
+        $skemas = auth()->user()
+            ->dosen
+            ->skemas()
+            ->where('jenis_usulan', Usulan::PENELITIAN)
             ->get()
             ->pluck('nama', 'id')
-            ->prepend(trans('global.pleaseSelect'), '');
+            ->prepend(trans('global.pleaseSelect'));
+
+        if($skemas->count() <= 0){
+            $skemas = RefSkema::where('jenis_usulan', Usulan::PENELITIAN)
+                ->whereAvailable()
+                ->get()
+                ->pluck('nama', 'id')
+                ->prepend(trans('global.pleaseSelect'), '');
+        }
 
         $prnFokus = PrnFokus::pluck('nama','id')
             ->prepend(trans('global.pleaseSelect'), '');
@@ -100,11 +110,22 @@ class PenelitianController extends Controller
     {
         abort_if(Gate::denies('penelitian_user_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $skemas = RefSkema::where('jenis_usulan', Usulan::PENELITIAN)
-            ->whereAvailable()
+        $skemas = auth()->user()
+            ->dosen
+            ->skemas()
+            ->where('jenis_usulan', Usulan::PENELITIAN)
             ->get()
             ->pluck('nama', 'id')
-            ->prepend(trans('global.pleaseSelect'), '');
+            ->prepend(trans('global.pleaseSelect'));
+
+        if($skemas->count() <= 0){
+            $skemas = RefSkema::where('jenis_usulan', Usulan::PENELITIAN)
+                ->whereAvailable()
+                ->get()
+                ->pluck('nama', 'id')
+                ->prepend(trans('global.pleaseSelect'), '');
+        }
+
 
         $prnFokus = PrnFokus::pluck('nama','id')
             ->prepend(trans('global.pleaseSelect'), '');
