@@ -44,15 +44,13 @@ class PengabdianController extends Controller
             ->skemas()
             ->where('jenis_usulan', Usulan::PENGABDIAN)
             ->get()
-            ->pluck('nama', 'id')
-            ->prepend(trans('global.pleaseSelect'));
+            ->pluck('nama', 'id');
 
         if($skemas->count() <= 0){
             $skemas = RefSkema::where('jenis_usulan', Usulan::PENGABDIAN)
                 ->whereAvailable()
                 ->get()
-                ->pluck('nama', 'id')
-                ->prepend(trans('global.pleaseSelect'), '');
+                ->pluck('nama', 'id');
         }
 
         $kode_rumpuns = KodeRumpun::where('level', 3)
@@ -175,15 +173,13 @@ class PengabdianController extends Controller
             ->skemas()
             ->where('jenis_usulan', Usulan::PENGABDIAN)
             ->get()
-            ->pluck('nama', 'id')
-            ->prepend(trans('global.pleaseSelect'));
+            ->pluck('nama', 'id');
 
         if($skemas->count() <= 0){
             $skemas = RefSkema::where('jenis_usulan', Usulan::PENGABDIAN)
                 ->whereAvailable()
                 ->get()
-                ->pluck('nama', 'id')
-                ->prepend(trans('global.pleaseSelect'), '');
+                ->pluck('nama', 'id');
         }
 
 

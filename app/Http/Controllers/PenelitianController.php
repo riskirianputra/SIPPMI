@@ -46,15 +46,13 @@ class PenelitianController extends Controller
             ->skemas()
             ->where('jenis_usulan', Usulan::PENELITIAN)
             ->get()
-            ->pluck('nama', 'id')
-            ->prepend(trans('global.pleaseSelect'));
+            ->pluck('nama', 'id');
 
         if($skemas->count() <= 0){
             $skemas = RefSkema::where('jenis_usulan', Usulan::PENELITIAN)
                 ->whereAvailable()
                 ->get()
-                ->pluck('nama', 'id')
-                ->prepend(trans('global.pleaseSelect'), '');
+                ->pluck('nama', 'id');
         }
 
         $prnFokus = PrnFokus::pluck('nama','id')
@@ -115,17 +113,14 @@ class PenelitianController extends Controller
             ->skemas()
             ->where('jenis_usulan', Usulan::PENELITIAN)
             ->get()
-            ->pluck('nama', 'id')
-            ->prepend(trans('global.pleaseSelect'));
+            ->pluck('nama', 'id');
 
         if($skemas->count() <= 0){
             $skemas = RefSkema::where('jenis_usulan', Usulan::PENELITIAN)
                 ->whereAvailable()
                 ->get()
-                ->pluck('nama', 'id')
-                ->prepend(trans('global.pleaseSelect'), '');
+                ->pluck('nama', 'id');
         }
-
 
         $prnFokus = PrnFokus::pluck('nama','id')
             ->prepend(trans('global.pleaseSelect'), '');
