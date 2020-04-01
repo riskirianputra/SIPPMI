@@ -48,6 +48,11 @@ class Penelitian extends Model
         'ringkasan_eksekutif',
     ];
 
+    public function fokus()
+    {
+        return $this->belongsTo(PrnFokus::class, 'fokus_id', 'id');
+    }
+
     public function anggotas()
     {
         return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id');
@@ -81,6 +86,24 @@ class Penelitian extends Model
     public function usulanAnggotumWithPenelitianId()
     {
         return $this->hasMany(UsulanAnggotum::class, 'usulan_id', 'penelitian_id');
+    }
+
+    public function ketua()
+    {
+        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
+            ->where('jabatan', 1);
+    }
+
+    public function anggota_dosens()
+    {
+        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
+            ->where('jabatan', 2)->where('tipe', 1);
+    }
+
+    public function anggota_mahasiswas()
+    {
+        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
+            ->where('jabatan', 2)->where('tipe', 2);
     }
 
     public function penelitianPenelitianReviewers()
@@ -222,6 +245,11 @@ class Penelitian extends Model
         $judul = str_replace('<p>', '', $this->judul);
         $judul = str_replace('</p>', '', $judul);
         return $judul;
+    }
+
+    public function getJudulTextAttribute($value)
+    {
+        return strip_tags($this->judul);
     }
 
     public function getRingkasanEksekutifSimpleAttribute($value){

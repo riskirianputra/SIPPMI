@@ -21,6 +21,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('user-alerts', 'UserAlertsController', ['except' => ['edit', 'update']]);
 
 // Penelitians
+    Route::get('penelitians/export', 'PenelitianExportController@export')->name('penelitian.export');
     Route::post('penelitians/filter', 'PenelitianController@filter')->name('penelitians.filter');
     Route::delete('penelitians/destroy', 'PenelitianController@massDestroy')->name('penelitians.massDestroy');
     Route::post('penelitians/media', 'PenelitianController@storeMedia')->name('penelitians.storeMedia');

@@ -50,6 +50,7 @@ class PenelitianAnggotaController extends Controller
         $anggota->usulan_id = $id;
         $anggota->identifier = $request->identifier;
         $anggota->unit = $request->unit;
+        $anggota->jabatan = 2;
         $anggota->save();
 
         return redirect()->back();

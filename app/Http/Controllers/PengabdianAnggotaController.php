@@ -42,12 +42,7 @@ class PengabdianAnggotaController extends Controller
         return view('pengabdians.anggota.create', compact('pengabdian', 'dosens','prodis'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request, Pengabdian $pengabdian)
     {
         $this->validate($request, UsulanAnggotum::$dosen_validation_rule);
@@ -66,6 +61,7 @@ class PengabdianAnggotaController extends Controller
     }
 
     public function mahasiswaStore(Request $request, $id){
+
         $this->validate($request, UsulanAnggotum::$mahasiswa_validation_rule);
 
         $anggota = new UsulanAnggotum();
@@ -74,6 +70,7 @@ class PengabdianAnggotaController extends Controller
         $anggota->usulan_id = $id;
         $anggota->identifier = $request->identifier;
         $anggota->unit = $request->unit;
+        $anggota->jabatan = 2;
         $anggota->save();
 
         return redirect()->back();
