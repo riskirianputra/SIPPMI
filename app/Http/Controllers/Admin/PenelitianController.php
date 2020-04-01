@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\PenelitianExport;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyPenelitianRequest;
@@ -15,6 +16,7 @@ use App\RipTahapan;
 use App\Usulan;
 use Gate;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -39,19 +41,30 @@ class PenelitianController extends Controller
             compact('penelitians', 'skema_penelitians', 'tahun_penelitians'));
     }
 
-    public function filter(Request $request){
+    public function filter(Request $request)
+    {
         abort_if(Gate::denies('penelitian_view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $tahun = request('tahun');
         $skema = request('skema');
 
+        if ($request->has('export')) {
+            if (!empty($skema)) {
+                $skema_name = RefSkema::findOrFail($skema)->nama;
+                $filename = 'penelitian-' . $skema_name . '-' . $tahun . '.xlsx';
+            } else {
+                $filename = 'penelitian-all-' . $tahun . '.xlsx';
+            }
+            return Excel::download(new PenelitianExport($skema, $tahun), $filename);
+        }
+
         $query = Penelitian::whereNotNull('created_at');
 
-        if(!empty($tahun)){
+        if (!empty($tahun)) {
             $query = Penelitian::where('tahun', $tahun);
         }
 
-        if(!empty($skema)){
+        if (!empty($skema)) {
             $query->where('skema_id', $skema);
         }
         $penelitians = $query->get();
@@ -64,7 +77,7 @@ class PenelitianController extends Controller
             ->pluck('nama', 'id');
 
         return view('admin.penelitians.index',
-            compact('penelitians', 'skema_penelitians', 'tahun_penelitians'));
+            compact('penelitians', 'skema_penelitians', 'tahun_penelitians', 'tahun', 'skema'));
     }
 
     public function create()
@@ -218,10 +231,10 @@ class PenelitianController extends Controller
     {
         abort_if(Gate::denies('penelitian_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $model         = new Penelitian();
-        $model->id     = $request->input('crud_id', 0);
+        $model = new Penelitian();
+        $model->id = $request->input('crud_id', 0);
         $model->exists = true;
-        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media', 'public');
+        $media = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media', 'public');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }

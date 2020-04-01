@@ -70,7 +70,7 @@ class UsulanAnggotum extends Model
         if($this->tipe == self::DOSEN){
             return $this->dosen->nidn;
         }else{
-            return '-';
+            return 'NIM:'.$this->identifier;
         }
     }
 }

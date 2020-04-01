@@ -15,14 +15,47 @@
 
     <div class="card">
         <div class="card-body">
-            {{ html()->form('POST', route('admin.penelitians.filter'))->class('form-inline')->open() }}
-            {{ html()->label('Tahun', 'tahun')->class('my-1 mr-sm-2') }}
-            {{ html()->select('tahun', $tahun_penelitians,old('tahun'))->class('form-control') }}
-            {{ html()->label('Skema', 'skema')->class('my-1 mr-sm-2 ml-sm-2') }}
-            {{ html()->select('skema', $skema_penelitians, old('skema'))->class('form-control') }}
-            {{ html()->submit('Filter')->class('btn btn-primary ml-sm-2') }}
-            {{ html()->form()->close() }}
+            <div id="exampleAccordion" data-children=".item">
+                <div class="item">
+                    <a data-toggle="collapse" data-parent="#exampleAccordion" href="#formPencarian"
+                       aria-expanded="false" aria-controls="formPencarian">
+                        Pencarian / Export Excel
+                    </a>
+                    <div class="collapse" id="formPencarian" role="tabpanel">
+                    {{ html()->form('POST', route('admin.penelitians.filter'))->open() }}
+                    <!-- Input (Select) Tahun -->
+                        <div class="form-group">
+                            <label class="form-label" for="tahun">Tahun</label>
+                            {{ html()->select('tahun', $tahun_penelitians, $tahun ?? old('tahun'))->class(["form-control", "is-invalid" => $errors->has('tahun')])->id('tahun') }}
+                            @error('tahun')
+                            <div class="invalid-feedback">{{ $errors->first('tahun') }}</div>
+                            @enderror
+                        </div>
+                        <!-- Input (Select) Skema -->
+                        <div class="form-group">
+                            <label class="form-label" for="skema">Skema</label>
+                            {{ html()->select('skema', $skema_penelitians, $skema ?? old('skema'))->class(["form-control", "is-invalid" => $errors->has('skema')])->id('skema')->placeholder('Semua Skema') }}
+                            @error('skema')
+                            <div class="invalid-feedback">{{ $errors->first('skema') }}</div>
+                            @enderror
+                        </div>
+                        {{--                        {{ html()->label('Tahun', 'tahun')->class('my-1 mr-sm-2') }}--}}
+                        {{--                        {{ html()->select('tahun', $tahun_penelitians, $tahun ?? old('tahun') )->class('form-control') }}--}}
+                        {{--                        {{ html()->label('Skema', 'skema')->class('my-1 mr-sm-2 ml-sm-2') }}--}}
+                        {{--                        {{ html()->select('skema', $skema_penelitians, $skema ?? old('skema'))->placeholder('Semua skema')->class('form-control') }}--}}
+                        <div class="form-group">
+                            <label class="form-label" for="export">Export Excel?
+                                <input name="export" type="checkbox">
+                            </label>
+                        </div>
+                        {{ html()->submit('Filter/Export')->class('btn btn-primary ml-sm-2') }}
+                    </div>
+                    {{ html()->form()->close() }}
+                </div>
+            </div>
         </div>
+
+    </div>
     </div>
 
     <div class="card">
@@ -67,7 +100,8 @@
                     </thead>
                     <tbody>
                     @foreach($penelitians as $key => $penelitian)
-                        <tr data-entry-id="{{ $penelitian->id }}" @if($penelitian->hasKomentar())class="bg-warning" @endif>
+                        <tr data-entry-id="{{ $penelitian->id }}"
+                            @if($penelitian->hasKomentar())class="bg-warning" @endif>
                             <td>
 
                             </td>
