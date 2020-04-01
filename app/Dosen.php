@@ -37,11 +37,12 @@ class Dosen extends Model
         '32' => 'III/b - Penata Muda Tk I',
         '33' => 'III/c - Penata',
         '34' => 'III/d - Penata Tk I',
-        '41' => 'III/a - Pembina',
-        '42' => 'III/b - Pembina Tk I',
-        '43' => 'III/c - Pembina Utama Muda',
-        '44' => 'III/d - Pembina Utama Madya',
-        '45' => 'III/e - Pembina Utama'
+        '41' => 'IV/a - Pembina',
+        '42' => 'IV/b - Pembina Tk I',
+        '43' => 'IV/c - Pembina Utama Muda',
+        '44' => 'IV/d - Pembina Utama Madya',
+        '45' => 'IV/e - Pembina Utama',
+        
     ];
 
     const JABATAN_FUNGSIONAL_SELECT = [

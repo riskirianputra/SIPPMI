@@ -12,24 +12,6 @@
 
 <div class="form-group row">
     <div class="col-sm-2">
-        <strong>Program Studi</strong>
-    </div>
-    <div class="col-sm-10">
-        {{ optional($penelitian->prodi)->nama }}
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-sm-2">
-        <strong>Kode Rumpun Ilmu</strong>
-    </div>
-    <div class="col-sm-10">
-        {{ optional($penelitian->kode_rumpun)->rumpun_ilmu }}
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-sm-2">
         <strong>Status Penelitian</strong>
     </div>
     <div class="col-sm-10">

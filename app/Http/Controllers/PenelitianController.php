@@ -187,12 +187,12 @@ class PenelitianController extends Controller
         $skema = RefSkema::findOrFail($penelitian->skema_id);
 
         $data = [
-            'anggota' => $penelitian->usulan->anggotas()->count(),
+            'anggota_dosen' => $penelitian->usulan->anggotas()->tipe(1)->count(),
             'anggota_mahasiswa' => $penelitian->usulan->anggotas()->tipe(2)->count()
         ];
 
         Validator::make($data, [
-            'anggota' => 'integer|min:'.$skema->anggota_min.'|max:'.$skema->anggota_max,
+            'anggota_dosen' => 'integer|min:'.$skema->anggota_min.'|max:'.$skema->anggota_max,
             'anggota_mahasiswa' => 'integer|min:'.$skema->mahasiswa_min.'|max:'.$skema->mahasiswa_max
         ])->validate();
 

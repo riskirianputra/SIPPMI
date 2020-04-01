@@ -26,9 +26,9 @@ class UpdatePenelitianRequest extends FormRequest
             'fokus_id' => ['required','integer',],
             'skema_id' => ['required'],
             'biaya'    => ['required','integer','min:'.$skema->biaya_minimal,'max:'.$skema->biaya_maksimal],
-            'file_cv'  => ['sometimes','required', 'mimes:pdf', 'size:5MB'],
-            'file_pengesahan' => ['sometimes','required' , 'mimes:pdf', 'size:5MB'],
-            'file_proposal' => ['sometimes','required', 'mimes:pdf', 'size:10MB']
+            'file_cv'  => ['sometimes','required', 'mimes:pdf'],
+            'file_pengesahan' => ['sometimes','required' , 'mimes:pdf'],
+            'file_proposal' => ['sometimes','required', 'mimes:pdf']
         ];
     }
 }

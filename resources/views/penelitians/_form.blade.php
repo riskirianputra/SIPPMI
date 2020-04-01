@@ -81,7 +81,8 @@
 
 <div class="form-group">
     <label for="file_pengesahan">Lembaran Pengesahan</label>
-    {{ html()->input('file', 'file_pengesahan')->id('file_pengesahan')->class('form-control') }}
+    {{ html()->input('file', 'file_pengesahan')->id('file_pengesahan')->class('form-control')->attribute('aria-describedBy', 'file_pengesahan_help') }}
+    <small id="file_pengesahan_help" class="form-text text-muted">Maksimal ukuran file : 5 MB</small>
     @if($errors->has('file_pengesahan'))
         <div class="invalid-feedback">
             {{ $errors->first('file_pengesahan') }}
@@ -98,7 +99,8 @@
 
 <div class="form-group">
     <label for="file_proposal">File Proposal</label>
-    {{ html()->input('file', 'file_proposal')->id('file_proposal')->class('form-control') }}
+    {{ html()->input('file', 'file_proposal')->id('file_proposal')->class('form-control')->attribute('aria-describedBy', 'file_proposal_help') }}
+    <small id="file_proposal_help" class="form-text text-muted">Maksimal ukuran file : 10 MB</small>
     @if($errors->has('file_proposal'))
         <div class="invalid-feedback">
             {{ $errors->first('file_proposal') }}
@@ -115,7 +117,8 @@
 
 <div class="form-group">
     <label for="file_cv">File CV</label>
-    {{ html()->input('file', 'file_cv')->id('file_cv')->class('form-control') }}
+    {{ html()->input('file', 'file_cv')->id('file_cv')->class('form-control')->attribute('aria-describedBy', 'file_cv_help') }}
+    <small id="file_cv_help" class="form-text text-muted">Maksimal ukuran file : 5 MB</small>
     @if($errors->has('file_proposal'))
         <div class="invalid-feedback">
             {{ $errors->first('file_cv') }}
