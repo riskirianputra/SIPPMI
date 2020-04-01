@@ -31,6 +31,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('dosens/destroy', 'DosenController@massDestroy')->name('dosens.massDestroy');
     Route::resource('dosens', 'DosenController');
 
+    //Dosen Skema
+    Route::resource('dosens.skemas', 'DosenSkemaController');
+
 // Kode Rumpuns
     Route::delete('kode-rumpuns/destroy', 'KodeRumpunController@massDestroy')->name('kode-rumpuns.massDestroy');
     Route::resource('kode-rumpuns', 'KodeRumpunController');

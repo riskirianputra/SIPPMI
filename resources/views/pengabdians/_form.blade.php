@@ -15,7 +15,7 @@
 
 <div class="form-group">
     <label for="skema_id">{{ trans('cruds.pengabdian.fields.skema') }}</label>
-    {{ html()->select('skema_id', $skemas)->id('skema_id')->class(['form-control', 'select2', 'is-invalid' => $errors->has('skema')]) }}
+    {{ html()->select('skema_id', $skemas)->id('skema_id')->class(['form-control', 'select2', 'is-invalid' => $errors->has('skema')])->placeholder('Pilihan Skema') }}
 
     @if($errors->has('skema_id'))
         <div class="invalid-feedback">
