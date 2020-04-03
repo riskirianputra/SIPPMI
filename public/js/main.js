@@ -447,8 +447,8 @@ var brandBoxChart3 = new Chart(document.getElementById('social-box-chart-3'), {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\WebApps\laravel-coreui3\resources\js\coreui\main.js */"./resources/js/coreui/main.js");
-module.exports = __webpack_require__(/*! D:\WebApps\laravel-coreui3\resources\sass\style.scss */"./resources/sass/style.scss");
+__webpack_require__(/*! D:\www\csi\resources\js\coreui\main.js */"./resources/js/coreui/main.js");
+module.exports = __webpack_require__(/*! D:\www\csi\resources\sass\style.scss */"./resources/sass/style.scss");
 
 
 /***/ })

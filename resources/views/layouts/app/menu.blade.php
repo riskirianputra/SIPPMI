@@ -220,6 +220,18 @@
             </li>
         @endcan
 
+        @can('review')
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link {{ request()->is('reviews') || request()->is('reviews/*') ? 'active' : '' }}"
+                   href="{{ route("reviews.index") }}">
+                <span class="c-sidebar-nav-icon">
+                    <i class="cil-school"></i>
+                </span>
+                    Review Penelitian
+                </a>
+            </li>
+            @endcan
+
     </ul>
     <button
         class="c-sidebar-minimizer c-class-toggler"

@@ -152,7 +152,7 @@ $('input[name="singledatepicker"]').daterangepicker({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\WebApps\laravel-coreui3\resources\js\coreui\advanced-forms.js */"./resources/js/coreui/advanced-forms.js");
+module.exports = __webpack_require__(/*! D:\www\csi\resources\js\coreui\advanced-forms.js */"./resources/js/coreui/advanced-forms.js");
 
 
 /***/ })

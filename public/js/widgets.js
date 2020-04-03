@@ -550,7 +550,7 @@ var brandBoxChart3 = new Chart(document.getElementById('social-box-chart-3'), {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\WebApps\laravel-coreui3\resources\js\coreui\widgets.js */"./resources/js/coreui/widgets.js");
+module.exports = __webpack_require__(/*! D:\www\csi\resources\js\coreui\widgets.js */"./resources/js/coreui/widgets.js");
 
 
 /***/ })

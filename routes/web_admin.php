@@ -106,6 +106,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('ref-skemas/destroy', 'RefSkemaController@massDestroy')->name('ref-skemas.massDestroy');
     Route::resource('ref-skemas', 'RefSkemaController');
 
+    Route::resource('ref-skemas.questions', 'RefSkemaQuestionController');
+
 // Outputs
     Route::delete('outputs/destroy', 'OutputController@massDestroy')->name('outputs.massDestroy');
     Route::resource('outputs', 'OutputController');

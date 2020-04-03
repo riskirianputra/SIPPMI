@@ -23,3 +23,6 @@ Route::post('pengabdian/{id}/anggota/mahasiswa-store','PengabdianAnggotaControll
 
 Route::resource('prn-fokus', 'PrnFokusController');
 Route::delete('prn-fokus/destroy', 'PrnFokusController@massDestroy')->name('prn-fokus.massDestroy');
+
+Route::resource('reviews', 'ReviewController');
+Route::post('reviews/filter', 'ReviewController@filter')->name('reviews.filter');

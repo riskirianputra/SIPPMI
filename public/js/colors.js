@@ -118,7 +118,7 @@ document.querySelectorAll('.theme-color').forEach(function (element) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\WebApps\laravel-coreui3\resources\js\coreui\colors.js */"./resources/js/coreui/colors.js");
+module.exports = __webpack_require__(/*! D:\www\csi\resources\js\coreui\colors.js */"./resources/js/coreui/colors.js");
 
 
 /***/ })

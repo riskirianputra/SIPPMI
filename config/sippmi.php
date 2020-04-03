@@ -10,4 +10,9 @@ return [
         'lap_akhir' => 'lap_akhir'
     ],
 
+    'tipe_pertanyaan' => [
+        1 => 'Skala 7',
+        2 => 'Text'
+    ]
+
 ];

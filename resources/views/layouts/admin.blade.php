@@ -23,6 +23,7 @@
 </head>
 
 <body class="c-app">
+
 @include('layouts.app.menu')
 
 {{--@include('layouts.app.sidebar')--}}
@@ -83,6 +84,9 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
 <script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
 <script src="{{ asset('js/quill.min.js') }}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+@include('sweet::alert')
 
 <script>
     $(document).ready(function () {

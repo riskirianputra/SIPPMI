@@ -25,27 +25,15 @@ class RefSkema extends Model
         'tanggal_selesai',
     ];
 
-    protected $fillable = [
-        'nama',
-        'anggota_max',
-        'sumber_dana',
-        'anggota_min',
-        'mahasiswa_min',
-        'mahasiswa_max',
-        'jenis_usulan',
-        'jangka_waktu',
-        'biaya_minimal',
-        'biaya_maksimal',
-        'tanggal_mulai',
-        'tanggal_selesai',
-        'jabatan_ketua_max',
-        'jabatan_ketua_min',
-        'jabatan_anggota_min',
-        'jabatan_anggota_max',
-        'deleted_at',
-        'updated_at',
-        'created_at',
-    ];
+    protected $guarded = [];
+
+    public function questions()
+    {
+        return $this->hasMany(RefSkemaQuestion::class);
+    }
+
+
+    /** LEGACY CODE BELOW */
 
     public function skemaOutputSkemas()
     {
