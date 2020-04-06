@@ -60,7 +60,7 @@ class UsulanAnggotum extends Model
     public function getNamaAttribute($value)
     {
         if($this->tipe == self::DOSEN){
-            return $this->dosen->nama;
+            return optional($this->dosen)->nama;
         }else{
             return $value;
         }
@@ -68,7 +68,7 @@ class UsulanAnggotum extends Model
 
     public function getNidnAttribute($value){
         if($this->tipe == self::DOSEN){
-            return $this->dosen->nidn;
+            return optional($this->dosen)->nidn;
         }else{
             return 'NIM:'.$this->identifier;
         }

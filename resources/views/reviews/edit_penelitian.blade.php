@@ -15,6 +15,7 @@
 @section('content')
 
     {{ html()->form('PUT', route('reviews.update', [$penelitian->id]))->open() }}
+    
 
     <div class="card">
         <div class="card-header">
@@ -49,23 +50,24 @@
             <!-- Static Field for Ketua Peneliti -->
             <div class="form-group">
                 <div class='form-label'>Ketua Peneliti</div>
-            </div>
+            
             <!-- Static Field for Ketua -->
-            <div class="form-group mr-1">
+            <div class="form-group ml-2">
                 <div class='form-label'>Nama</div>
                 <div>{{ optional($penelitian->ketua[0])->nama }}</div>
             </div>
 
             <!-- Static Field for NIDN -->
-            <div class="form-group mr-1">
+            <div class="form-group ml-2">
                 <div class='form-label'>NIDN</div>
                 <div>{{ optional($penelitian->ketua[0])->nidn }}</div>
             </div>
 
             <!-- Static Field for Jabatan Fungsional -->
-            <div class="form-group mr-1">
+            <div class="form-group ml-2">
                 <div class='form-label'>Jabatan Fungsional</div>
                 <div>{{ $penelitian->ketua[0]->dosen->fungsional_text }}</div>
+            </div>
             </div>
 
             <!-- Static Field for Anggota Peneliti -->
@@ -79,11 +81,35 @@
                 <div class='form-label'>Anggota Mahasiswa</div>
                 <div>{{ $penelitian->anggota_mahasiswas->count() }} orang</div>
             </div>
-
-            <!-- Static Field for Biaya Penelitian -->
-            <div class="form-group mr-1">
-                <div class='form-label'>Biaya Penelitian</div>
+            
+            <div class="form-group row">
+    <div class="col-sm-2">
+        <strong>File</strong>
+    </div>
+    <div class="col-sm-10">
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="{{ $penelitian->getFileProposalUrl() }}" target="_blank">
+                    <i class="fa fa-file-pdf-o text-danger"></i>
+                    Proposal
+                </a>
             </div>
+            <div class="col-sm-3">
+                <a href="{{ $penelitian->getFileCvUrl() }}" target="_blank">
+                    <i class="fa fa-file-pdf-o text-danger"></i>
+                    CV
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="{{ $penelitian->getFilePengesahanUrl() }}" target="_blank">
+                    <i class="fa fa-file-pdf-o text-danger"></i>
+                    Lembaran Pengesahan
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
             <!-- Static Field for Kriteria -->
@@ -152,4 +178,12 @@
     </div>
 
     {{ html()->form()->close() }}
+@endsection
+
+@section('styles')
+<style>
+.form-label{
+	font-weight:bold;
+}
+</style>
 @endsection

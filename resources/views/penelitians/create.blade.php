@@ -71,7 +71,7 @@
 
 @section('content')
 
-    @if($skemas->count() > 1)
+    @if($skemas->count() > 0)
 
         <div class="row">
             <div class="col-md-12">
