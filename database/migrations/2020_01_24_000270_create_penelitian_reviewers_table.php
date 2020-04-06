@@ -8,7 +8,7 @@ class CreatePenelitianReviewersTable extends Migration
 {
     public function up()
     {
-        Schema::create('penelitian_reviewers', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('tahapan_review_id');
             $table->unsignedInteger('reviewer_id');

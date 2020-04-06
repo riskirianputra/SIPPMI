@@ -29,6 +29,6 @@ class PenelitianExport implements FromView
         $no = 1;
         $ketua = null;
 
-        return view('admin.penelitians.exports', compact('penelitians', 'ketua', 'no'));
+        return view('admins.penelitians.exports', compact('penelitians', 'ketua', 'no'));
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\PenelitianExport;
+use App\Exports\PengabdianExport;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyPengabdianRequest;
@@ -11,8 +13,10 @@ use App\KodeRumpun;
 use App\Pengabdian;
 use App\Prodi;
 use App\RefSkema;
+use App\Usulan;
 use Gate;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\Response;
 
 class PengabdianController extends Controller
@@ -25,7 +29,54 @@ class PengabdianController extends Controller
 
         $pengabdians = Pengabdian::all();
 
-        return view('admin.pengabdians.index', compact('pengabdians'));
+        $tahun_pengabdians = Pengabdian::selectRaw('distinct(tahun) as tahun')
+            ->get()
+            ->pluck('tahun', 'tahun');
+        $skema_pengabdians = RefSkema::where('jenis_usulan', Usulan::PENGABDIAN)
+            ->get()
+            ->pluck('nama', 'id');
+
+        return view('admin.pengabdians.index',
+            compact('pengabdians', 'skema_pengabdians', 'tahun_pengabdians'));
+    }
+
+    public function filter(Request $request)
+    {
+        abort_if(Gate::denies('pengabdian_view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $tahun = request('tahun');
+        $skema = request('skema');
+
+        if ($request->has('export')) {
+            if (!empty($skema)) {
+                $skema_name = RefSkema::findOrFail($skema)->nama;
+                $filename = 'pengabdian-' . $skema_name . '-' . $tahun . '.xlsx';
+            } else {
+                $filename = 'pengabdian-all-' . $tahun . '.xlsx';
+            }
+            return Excel::download(new PengabdianExport($skema, $tahun), $filename);
+        }
+
+        $query = Pengabdian::whereNotNull('created_at');
+
+        if (!empty($tahun)) {
+            $query = Pengabdian::where('tahun', $tahun);
+        }
+
+        if (!empty($skema)) {
+            $query->where('skema_id', $skema);
+        }
+        $pengabdians = $query->get();
+
+        $tahun_pengabdians = Pengabdian::selectRaw('distinct(year(created_at)) as tahun')
+            ->get()
+            ->pluck('tahun', 'tahun');
+        $skema_pengabdians = RefSkema::where('jenis_usulan', Usulan::PENGABDIAN)
+            ->get()
+            ->pluck('nama', 'id');
+
+        return view('admin.pengabdians.index',
+            compact('pengabdians', 'skema_pengabdians', 'tahun_pengabdians', 'tahun', 'skema'));
     }
 
     public function create()

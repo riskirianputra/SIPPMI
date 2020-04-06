@@ -42,43 +42,27 @@ class Dosen extends Model
         '43' => 'IV/c - Pembina Utama Muda',
         '44' => 'IV/d - Pembina Utama Madya',
         '45' => 'IV/e - Pembina Utama',
-        
+
     ];
 
     const JABATAN_FUNGSIONAL_SELECT = [
         'DSN' => 'Staf Pengajar (Dosen)',
-        'AA'  => 'Asisten Ahli',
-        'L'   => 'Lektor',
-        'LK'  => 'Lektor Kepala',
-        'GB'  => 'Guru Besar',
+        'AA' => 'Asisten Ahli',
+        'L' => 'Lektor',
+        'LK' => 'Lektor Kepala',
+        'GB' => 'Guru Besar',
     ];
 
-    protected $fillable = [
-        'id',
-        'nip',
-        'nama',
-        'nidn',
-        'email',
-        'status',
-        'telepon',
-        'prodi_id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'tempat_lahir',
-        'tanggal_lahir',
-        'jenis_kelamin',
-        'pangkat_golongan',
-        'jabatan_fungsional',
-    ];
+    protected $guarded = [];
 
     public function dosenPenelitianAnggota()
     {
         return $this->hasMany(PenelitianAnggotum::class, 'dosen_id', 'id');
     }
 
-    public function user(){
-        return $this->hasOne(User::class,'id','id');
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'id');
     }
 
     public function dosenPengabdianAnggota()
@@ -106,7 +90,13 @@ class Dosen extends Model
         $this->attributes['tanggal_lahir'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 
-    public function getNamaNidnAttribute($value){
-        return $this->nama.' - '.$this->nidn;
+    public function getNamaNidnAttribute($value)
+    {
+        return $this->nama . ' - ' . $this->nidn;
+    }
+
+    public function getFungsionalTextAttribute($value)
+    {
+        return $this->fungsional ? self::JABATAN_FUNGSIONAL_SELECT[$this->fungsional] : null;
     }
 }

@@ -5,14 +5,16 @@
         'Skema' => route('admin.ref-skemas.index'),
         'Detail' => '#'
     ]) !!}
-@stop
+@endsection
+
 @section('toolbar')
     @can('ref_skema_manage')
-        {!! cui_toolbar_btn(route('admin.ref-skemas.index'), 'icon-list', trans('global.list').' '.trans('cruds.refSkema.title_singular') ) !!}
-        {!! cui_toolbar_btn(route('admin.ref-skemas.edit',[$refSkema]), 'icon-pencil', trans('global.edit').' '.trans('cruds.refSkema.title_singular') ) !!}
-        {!! cui_toolbar_btn(route('admin.ref-skemas.destroy',[$refSkema]), 'icon-delete', trans('global.delete').' '.trans('cruds.refSkema.title_singular') ) !!}
+        {!! cui_toolbar_btn(route('admin.ref-skemas.index'), 'cil-list', trans('global.list').' '.trans('cruds.refSkema.title_singular') ) !!}
+        {!! cui_toolbar_btn(route('admin.ref-skemas.edit',[$refSkema]), 'cil-pencil', trans('global.edit').' '.trans('cruds.refSkema.title_singular') ) !!}
+        {!! cui_toolbar_btn(route('admin.ref-skemas.destroy',[$refSkema]), 'cil-trash', trans('global.delete').' '.trans('cruds.refSkema.title_singular') ) !!}
     @endcan
-@stop
+@endsection
+
 @section('content')
 <div class="col">
     <div class="row">
@@ -127,34 +129,13 @@
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    {{ trans('global.relatedData') }}
-                </div>
-                <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#skema_penelitians" role="tab" data-toggle="tab">
-                            {{ trans('cruds.penelitian.title') }}
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#skema_pengabdians" role="tab" data-toggle="tab">
-                            {{ trans('cruds.pengabdian.title') }}
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane" role="tabpanel" id="skema_penelitians">
-{{--                        @includeIf('admin.refSkemas.relationships.skemaPenelitians', ['penelitians' => $refSkema->skemaPenelitians])--}}
-                    </div>
-                    <div class="tab-pane" role="tabpanel" id="skema_pengabdians">
-                        @includeIf('admin.refSkemas.relationships.skemaPengabdians', ['pengabdians' => $refSkema->skemaPengabdians])
-                    </div>
-                </div>
-            </div>
+
+
         </div>
         <div class="col-sm-6">
             @includeIf('admin.refSkemas.relationships.skemaOutputSkemas', ['outputSkemas' => $refSkema->skemaOutputSkemas,'refSkema_id' => $refSkema->id])
+
+            @include('admins.ref_skemas.questions._index', ['questions' => $refSkema->questions, 'skema' => $refSkema])
         </div>
     </div>
 </div>

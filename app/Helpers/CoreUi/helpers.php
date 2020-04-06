@@ -8,6 +8,12 @@ if(!function_exists('cui')){
     }
 }
 
+if(!function_exists('notify')){
+    function notify($type, $title, $message = null, $options = []){
+        alert()->$type($title, $message);
+    }
+}
+
 function cui_toolbar_btn_delete($url, $id, $icon, $text = null, $message = 'Anda yakin?')
 {
     $str = Form::open([

@@ -9,18 +9,12 @@ class PenelitianReviewer extends Model
 {
     use SoftDeletes;
 
-    public $table = 'penelitian_reviewers';
+    public $table = 'reviews';
 
-    protected $fillable = [
-        'reviewer_id',
-        'usulan_id',
-        'tahapan_review_id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    protected $guarded = [];
 
     protected $dates = [
+        'review_at',
         'created_at',
         'updated_at',
         'deleted_at',

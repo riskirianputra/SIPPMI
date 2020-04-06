@@ -18,7 +18,7 @@ class CreatePengabdiansTable extends Migration
             $table->longText('ringkasan_eksekutif')->nullable();
             $table->integer('status_pengabdian')->nullable();
             $table->string('multi_tahun')->nullable();
-            $table->integer('tahun_ke')->nullable();
+            $table->integer('tahun')->nullable();
             $table->decimal('biaya', 15, 2)->nullable();
             $table->string('file_proposal')->nullable();
             $table->string('file_lap_progress')->nullable();

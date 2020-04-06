@@ -158,7 +158,7 @@ var editor = new Quill('#editor', {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\WebApps\laravel-coreui3\resources\js\coreui\text-editor.js */"./resources/js/coreui/text-editor.js");
+module.exports = __webpack_require__(/*! D:\www\csi\resources\js\coreui\text-editor.js */"./resources/js/coreui/text-editor.js");
 
 
 /***/ })

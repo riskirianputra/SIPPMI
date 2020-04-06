@@ -26,16 +26,9 @@ class TahapanReview extends Model
         3 => 3
     ];
 
-    protected $fillable = [
-        'nama',
-        'mulai',
-        'selesai',
-        'tahun',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'jumlah_reviewer',
-    ];
+    protected $guarded = [];
+
+    /** LEGACY CODEJ */
 
     public function tahapanReviewPenelitianReviewers()
     {

@@ -241,7 +241,7 @@ var polarAreaChart = new Chart(document.getElementById('canvas-6'), {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\WebApps\laravel-coreui3\resources\js\coreui\charts.js */"./resources/js/coreui/charts.js");
+module.exports = __webpack_require__(/*! D:\www\csi\resources\js\coreui\charts.js */"./resources/js/coreui/charts.js");
 
 
 /***/ })
