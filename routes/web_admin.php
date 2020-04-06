@@ -28,6 +28,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('penelitians/ckmedia', 'PenelitianController@storeCKEditorImages')->name('penelitians.storeCKEditorImages');
     Route::resource('penelitians', 'PenelitianController');
 
+    // Pengabdians
+    Route::post('pengabdians/filter', 'PengabdianController@filter')->name('pengabdians.filter');
+    Route::delete('pengabdians/destroy', 'PengabdianController@massDestroy')->name('pengabdians.massDestroy');
+    Route::post('pengabdians/media', 'PengabdianController@storeMedia')->name('pengabdians.storeMedia');
+    Route::post('pengabdians/ckmedia', 'PengabdianController@storeCKEditorImages')->name('pengabdians.storeCKEditorImages');
+    Route::resource('pengabdians', 'PengabdianController');
+
 // Dosens
     Route::delete('dosens/destroy', 'DosenController@massDestroy')->name('dosens.massDestroy');
     Route::resource('dosens', 'DosenController');
@@ -55,11 +62,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('prodis/destroy', 'ProdiController@massDestroy')->name('prodis.massDestroy');
     Route::resource('prodis', 'ProdiController');
 
-// Pengabdians
-    Route::delete('pengabdians/destroy', 'PengabdianController@massDestroy')->name('pengabdians.massDestroy');
-    Route::post('pengabdians/media', 'PengabdianController@storeMedia')->name('pengabdians.storeMedia');
-    Route::post('pengabdians/ckmedia', 'PengabdianController@storeCKEditorImages')->name('pengabdians.storeCKEditorImages');
-    Route::resource('pengabdians', 'PengabdianController');
 
 // Pengabdian Anggota
     Route::delete('pengabdian-anggota/destroy', 'PengabdianAnggotaController@massDestroy')->name('pengabdian-anggota.massDestroy');
@@ -141,7 +143,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('pengabdian-biayas', 'PengabdianBiayaController');
 
 // Reviewers
-   Route::get('reviewers', 'ReviewerController@index')->name('reviewers.index');
+    Route::get('reviewers', 'ReviewerController@index')->name('reviewers.index');
     Route::post('reviewers/create', 'ReviewerController@store')->name('reviewers.store');
     Route::put('reviewers/update/{id}', 'ReviewerController@update')->name('reviewers.update');
     Route::delete('reviewers/delete/{id}', 'ReviewerController@destroy')->name('reviewers.destroy');
@@ -160,10 +162,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('usulan.komentars', 'UsulanKomentarController');
 
 // Plotting Reviewer
-    Route::get('plotting-reviewers','PlottingReviewerController@index')->name('plotting-reviewers.index');
-    Route::get('plotting-reviewers/reviewer/{tahapan_review_id}/{usulan_id}','PlottingReviewerController@getReviewer')->name('plotting-reviewers.reviewer');
-    Route::get('plotting-reviewers/rekapitulasi','PlottingReviewerController@rekapitulasi')->name('plotting-reviewers.rekapitulasi');
-    Route::post('plotting-reviewers','PlottingReviewerController@filter')->name('plotting-reviewers.filter');
-    Route::post('plotting-reviewers/plot','PlottingReviewerController@plotReviewer')->name('plotting-reviewers.plot');
-    Route::delete('plotting-reviewers/{id}/plot','PlottingReviewerController@deletePlotReviewer')->name('plotting-reviewers.delete');
+    Route::get('plotting-reviewers', 'PlottingReviewerController@index')->name('plotting-reviewers.index');
+    Route::get('plotting-reviewers/reviewer/{tahapan_review_id}/{usulan_id}', 'PlottingReviewerController@getReviewer')->name('plotting-reviewers.reviewer');
+    Route::get('plotting-reviewers/rekapitulasi', 'PlottingReviewerController@rekapitulasi')->name('plotting-reviewers.rekapitulasi');
+    Route::post('plotting-reviewers', 'PlottingReviewerController@filter')->name('plotting-reviewers.filter');
+    Route::post('plotting-reviewers/plot', 'PlottingReviewerController@plotReviewer')->name('plotting-reviewers.plot');
+    Route::delete('plotting-reviewers/{id}/plot', 'PlottingReviewerController@deletePlotReviewer')->name('plotting-reviewers.delete');
 });

@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PenelitianReviewer extends Model
+class Review extends Model
 {
     use SoftDeletes;
 
@@ -38,5 +38,22 @@ class PenelitianReviewer extends Model
     public function ayam()
     {
         return $this->belongsTo(Usulan::class, 'usulan_id','id');
+    }
+
+    public function penilaians()
+    {
+        return $this->hasMany(ReviewPenilaian::class, 'review_id', 'id');
+    }
+
+    /** Extended Attribute */
+    public function getSubTotalAttribute()
+    {
+        $penilaians = $this->penilaians;
+        $total = 0;
+        foreach($penilaians as $penilaian)
+        {
+            $total += $penilaian->sub_total;
+        }
+        return $total;
     }
 }

@@ -54,7 +54,6 @@ class PlottingReviewerController extends Controller
         $tahapanRiview = TahapanReview::where('tahun', Carbon::now()->year)
             ->pluck('nama','id');
         $skemas = RefSkema::where('jenis_usulan', Usulan::PENELITIAN)
-            ->whereAvailable()
             ->get()
             ->pluck('nama', 'id');
 

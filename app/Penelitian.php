@@ -48,6 +48,39 @@ class Penelitian extends Model
         'ringkasan_eksekutif',
     ];
 
+    public function ketua()
+    {
+        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
+            ->where('jabatan', 1);
+    }
+
+    public function anggota_dosens()
+    {
+        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
+            ->where('jabatan', 2)->where('tipe', 1);
+    }
+
+    public function anggota_mahasiswas()
+    {
+        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
+            ->where('jabatan', 2)->where('tipe', 2);
+    }
+
+    public function reviewers()
+    {
+        return $this->hasMany(Review::class, 'usulan_id', 'id');
+    }
+
+    public function members()
+    {
+        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
+            ->where('jabatan', 2);
+    }
+
+
+
+    /** LEGACY CODE */
+
     public function fokus()
     {
         return $this->belongsTo(PrnFokus::class, 'fokus_id', 'id');
@@ -88,28 +121,10 @@ class Penelitian extends Model
         return $this->hasMany(UsulanAnggotum::class, 'usulan_id', 'penelitian_id');
     }
 
-    public function ketua()
-    {
-        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
-            ->where('jabatan', 1);
-    }
 
-    public function anggota_dosens()
-    {
-        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
-            ->where('jabatan', 2)->where('tipe', 1);
-    }
 
-    public function anggota_mahasiswas()
-    {
-        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
-            ->where('jabatan', 2)->where('tipe', 2);
-    }
 
-    public function penelitianPenelitianReviewers()
-    {
-        return $this->hasMany(PenelitianReviewer::class, 'penelitian_id', 'id');
-    }
+
 
     public function skema()
     {

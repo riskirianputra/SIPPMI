@@ -7,6 +7,7 @@
         <th>Anggota</th>
         <th>Mahasiswa</th>
         <th>Judul</th>
+        <th>Mitra</th>
         <th>Skema</th>
         <th>Biaya</th>
         <th>Fakultas</th>
@@ -19,50 +20,51 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($penelitians as $penelitian)
+    @foreach($pengabdians as $pengabdian)
         @php
-            $ketua = $penelitian->ketua[0];
+            $ketua = $pengabdian->ketua[0];
         @endphp
         <tr>
             <td>{{ $no++ }}</td>
             <td>{{ optional($ketua)->nidn }}</td>
             <td>{{ optional($ketua)->nama }}</td>
             <td>
-                @if($penelitian->anggota_dosens)
-                    @foreach($penelitian->anggota_dosens as $anggota)
+                @if($pengabdian->anggota_dosens)
+                    @foreach($pengabdian->anggota_dosens as $anggota)
                         {{ $anggota->nama }} /{{ $anggota->nidn }}<br>
                     @endforeach
                 @endif
             </td>
             <td>
-                @if($penelitian->anggota_mahasiswas)
-                    @foreach($penelitian->anggota_mahasiswas as $anggota)
+                @if($pengabdian->anggota_mahasiswas)
+                    @foreach($pengabdian->anggota_mahasiswas as $anggota)
                         {{ $anggota->nama }} /{{ $anggota->nidn }}<br>
                     @endforeach
                 @endif
             </td>
-            <td>{{ $penelitian->judul_text }}</td>
-            <td>{{ optional($penelitian->skema)->nama }}</td>
+            <td>{{ $pengabdian->judul_text }}</td>
+            <td>{{ $pengabdian->mitra_pengabdian }}</td>
+            <td>{{ optional($pengabdian->skema)->nama }}</td>
+            <td>{{ $pengabdian->biaya }}</td>
             <td>{{ optional($ketua->dosen->prodi)->fakultas->nama }}</td>
             <td>{{ optional($ketua->dosen->prodi)->nama }}</td>
-            <td>{{ optional($penelitian->fokus)->nama }}</td>
-            <td>{{ $penelitian->biaya }}</td>
+            <td>{{ optional($pengabdian->fokus)->nama }}</td>
             <td>
-                @if(!empty($penelitian->file_proposal))
+                @if(!empty($pengabdian->file_proposal))
                     OK
                 @endif
             </td>
             <td>
-                @if(!empty($penelitian->file_cv))
+                @if(!empty($pengabdian->file_cv))
                     OK
                 @endif
             </td>
             <td>
-                @if(!empty($penelitian->file_pengesahan))
+                @if(!empty($pengabdian->file_pengesahan))
                     OK
                 @endif
             </td>
-            <td>{{ $penelitian->status_text }}</td>
+            <td>{{ $pengabdian->status_text }}</td>
         </tr>
     @endforeach
     </tbody>

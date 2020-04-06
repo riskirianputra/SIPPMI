@@ -27,25 +27,27 @@ class Pengabdian extends Model
         'deleted_at',
     ];
 
+    protected $guarded = [];
 
+    public function ketua()
+    {
+        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
+            ->where('jabatan', 1);
+    }
 
-    protected $fillable = [
-        'id',
-        'judul',
-        'biaya',
-        'biaya_final',
-        'skema_id',
-        'prodi_id',
-        'tahun_ke',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'multi_tahun',
-        'kode_rumpun_id',
-        'mitra_pengabdian',
-        'status_pengabdian',
-        'ringkasan_eksekutif',
-    ];
+    public function anggota_dosens()
+    {
+        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
+            ->where('jabatan', 2)->where('tipe', 1);
+    }
+
+    public function anggota_mahasiswas()
+    {
+        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
+            ->where('jabatan', 2)->where('tipe', 2);
+    }
+
+    /** LEGACY CODE */
 
     public function anggotas()
     {
@@ -204,6 +206,11 @@ class Pengabdian extends Model
         return $judul;
     }
 
+    public function getJudulTextAttribute($value)
+    {
+        return strip_tags($this->judul);
+    }
+
     public function getRingkasanEksekutifSimpleAttribute($value){
         $ringkasan = str_replace(
             '</p>',
@@ -212,43 +219,4 @@ class Pengabdian extends Model
         return $ringkasan;
     }
 
-//    public function getFileProposalAttribute()
-//    {
-//        return $this->getMedia('file_proposal')->last();
-//    }
-
-//    public function getFileLembaranPengesahanAttribute()
-//    {
-//        return $this->getMedia('file_lembaran_pengesahan')->last();
-//    }
-
-//    public function getFileLaporanKemajuanAttribute()
-//    {
-//        return $this->getMedia('file_laporan_kemajuan')->last();
-//    }
-
-//    public function getFileLaporanKeuanganAttribute()
-//    {
-//        return $this->getMedia('file_laporan_keuangan')->last();
-//    }
-
-//    public function getFileLaporanAkhirAttribute()
-//    {
-//        return $this->getMedia('file_laporan_akhir')->last();
-//    }
-
-//    public function getFileLogbookAttribute()
-//    {
-//        return $this->getMedia('file_logbook')->last();
-//    }
-
-//    public function getFileProfilePengabdianAttribute()
-//    {
-//        return $this->getMedia('file_profile_pengabdian')->last();
-//    }
-
-//    public function created_by()
-//    {
-//        return $this->belongsTo(User::class, 'created_by_id');
-//    }
 }

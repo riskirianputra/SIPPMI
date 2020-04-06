@@ -25,4 +25,7 @@ Route::resource('prn-fokus', 'PrnFokusController');
 Route::delete('prn-fokus/destroy', 'PrnFokusController@massDestroy')->name('prn-fokus.massDestroy');
 
 Route::resource('reviews', 'ReviewController');
+Route::get('reviews', 'ReviewController@index')->name('reviews.index');
 Route::post('reviews/filter', 'ReviewController@filter')->name('reviews.filter');
+Route::get('reviews/{usulan}/edit', 'ReviewController@edit')->name('reviews.edit');
+Route::patch('reviews/{usulan}', 'ReviewController@update')->name('reviews.update');
