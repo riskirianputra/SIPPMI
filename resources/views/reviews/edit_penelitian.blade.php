@@ -15,7 +15,7 @@
 @section('content')
 
     {{ html()->form('PUT', route('reviews.update', [$penelitian->id]))->open() }}
-    
+
 
     <div class="card">
         <div class="card-header">
@@ -24,96 +24,98 @@
 
         <div class="card-body">
             <!-- Static Field for Judul -->
-            <div class="form-group">
-                <div class='form-label'>Judul</div>
-                <div>{!! $penelitian->judul_text !!}</div>
+            <div class="form-group row">
+                <div class='col-md-3 col-form-label'>Judul</div>
+                <div class="col-md-9">
+                    <div>{!! $penelitian->judul_text !!}</div>
+                </div>
             </div>
 
             <!-- Static Field for Skim -->
-            <div class="form-group">
-                <div class='form-label'>Skim</div>
-                <div>{{ $penelitian->skema->nama }}</div>
+            <div class='form-group row'>
+                <div class='col-md-3 col-form-label'>Skim</div>
+                <div class="col-md-9">
+                    <div>{{ $penelitian->skema->nama }}</div>
+                </div>
             </div>
 
             <!-- Static Field for Program Studi -->
-            <div class="form-group">
-                <div class='form-label'>Program Studi</div>
-                <div>{{ optional($penelitian->ketua[0]->dosen->prodi)->nama }}</div>
-            </div>
-
-            <!-- Static Field for Fakultas -->
-            <div class="form-group">
-                <div class='form-label'>Fakultas</div>
-                <div>{{ optional($penelitian->ketua[0]->dosen->prodi)->fakultas->nama }}</div>
+            <div class='form-group row'>
+                <div class='col-md-3 col-form-label'>Prodi/Fakultas</div>
+                <div class="col-md-9">
+                    <div>
+                        {{ optional($penelitian->ketua[0]->dosen->prodi)->nama }} /
+                        {{ optional($penelitian->ketua[0]->dosen->prodi)->fakultas->nama }}
+                    </div>
+                </div>
             </div>
 
             <!-- Static Field for Ketua Peneliti -->
-            <div class="form-group">
-                <div class='form-label'>Ketua Peneliti</div>
-            
-            <!-- Static Field for Ketua -->
-            <div class="form-group ml-2">
-                <div class='form-label'>Nama</div>
-                <div>{{ optional($penelitian->ketua[0])->nama }}</div>
+            <div class='form-group row'>
+                <div class='col-md-3 col-form-label'>Ketua Peneliti</div>
+                <div class="col-md-9">
+                    <div>{{ optional($penelitian->ketua[0])->nama }}</div>
+                    <div>{{ optional($penelitian->ketua[0])->nidn }}</div>
+                    <div>{{ $penelitian->ketua[0]->dosen->fungsional_text }}</div>
+                </div>
             </div>
 
-            <!-- Static Field for NIDN -->
-            <div class="form-group ml-2">
-                <div class='form-label'>NIDN</div>
-                <div>{{ optional($penelitian->ketua[0])->nidn }}</div>
-            </div>
-
-            <!-- Static Field for Jabatan Fungsional -->
-            <div class="form-group ml-2">
-                <div class='form-label'>Jabatan Fungsional</div>
-                <div>{{ $penelitian->ketua[0]->dosen->fungsional_text }}</div>
-            </div>
-            </div>
 
             <!-- Static Field for Anggota Peneliti -->
-            <div class="form-group">
-                <div class='form-label'>Anggota Peneliti</div>
-                <div> {{ $penelitian->anggota_dosens->count() }} orang</div>
+            <div class='form-group row'>
+                <div class='col-md-3 col-form-label'>Anggota (Dosen)</div>
+                <div class="col-md-9">
+                    <ul>
+                        @foreach($penelitian->anggota_dosens as $dosen)
+                            <li>{{ optional($dosen)->nama }} / <small> {{ optional($dosen)->nidn }}</small></li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
 
-            <!-- Static Field for Anggota Mahasiswa -->
-            <div class="form-group">
-                <div class='form-label'>Anggota Mahasiswa</div>
-                <div>{{ $penelitian->anggota_mahasiswas->count() }} orang</div>
+            <div class='form-group row'>
+                <div class='col-md-3 col-form-label'>Anggota (Mahasiswa)</div>
+                <div class="col-md-9">
+                    <ul>
+                        @foreach($penelitian->anggota_mahasiswas as $mahasiswa)
+                            <li>{{ optional($mahasiswa)->nama }} / <small> {{ optional($mahasiswa)->nidn }}</small></li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
-            
+
+
             <div class="form-group row">
-    <div class="col-sm-2">
-        <strong>File</strong>
-    </div>
-    <div class="col-sm-10">
-        <div class="row">
-            <div class="col-sm-3">
-                <a href="{{ $penelitian->getFileProposalUrl() }}" target="_blank">
-                    <i class="fa fa-file-pdf-o text-danger"></i>
-                    Proposal
-                </a>
+                <div class="col-sm-3">
+                    <strong>File</strong>
+                </div>
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <a href="{{ $penelitian->getFileProposalUrl() }}" target="_blank">
+                                <i class="fa fa-file-pdf-o text-danger"></i>
+                                Proposal
+                            </a>
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="{{ $penelitian->getFileCvUrl() }}" target="_blank">
+                                <i class="fa fa-file-pdf-o text-danger"></i>
+                                CV
+                            </a>
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="{{ $penelitian->getFilePengesahanUrl() }}" target="_blank">
+                                <i class="fa fa-file-pdf-o text-danger"></i>
+                                Lembaran Pengesahan
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-3">
-                <a href="{{ $penelitian->getFileCvUrl() }}" target="_blank">
-                    <i class="fa fa-file-pdf-o text-danger"></i>
-                    CV
-                </a>
-            </div>
-            <div class="col-sm-3">
-                <a href="{{ $penelitian->getFilePengesahanUrl() }}" target="_blank">
-                    <i class="fa fa-file-pdf-o text-danger"></i>
-                    Lembaran Pengesahan
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 
             <!-- Static Field for Kriteria -->
-            <div class="form-group">
+            <div class='form-group row'>
                 <table class="table table-outline table-responsive-sm">
                     <thead class="{{ config('style.thead') }}">
                     <tr>
@@ -145,28 +147,34 @@
             </div>
 
             <!-- Static Field for  -->
-            <div class="form-group">
-                <div class='form-label'>Biaya Diusulkan</div>
-                <div> Rp {{ number_format($penelitian->biaya, 0, ',', '.') }}</div>
+            <div class='form-group row'>
+                <div class='col-md-3 col-form-label'>Biaya Diusulkan</div>
+                <div class="col-md-9">
+                    <div> Rp {{ number_format($penelitian->biaya, 0, ',', '.') }}</div>
+                </div>
             </div>
 
             <!-- Text Field Input for Direkomendasikan -->
-            <div class="form-group">
-                <label class="form-label" for="biaya">Rekomendasi Biaya Penelitian</label>
-                {{ html()->text('biaya')->value($review->biaya)->class(["form-control", "is-invalid" => $errors->has('biaya')])->id('biaya')->placeholder('Tuliskan biaya tanpa menggunakan titik/koma') }}
-                @error('biaya')
-                <div class="invalid-feedback">{{ $errors->first('biaya') }}</div>
-                @enderror
+            <div class='form-group row'>
+                <label class="col-md-3 col-form-label" for="biaya">Rekomendasi Biaya Penelitian</label>
+                <div class="col-md-5">
+                    {{ html()->text('biaya')->value($review->biaya)->class(["form-control", "is-invalid" => $errors->has('biaya')])->id('biaya')->placeholder('Tuliskan biaya tanpa menggunakan titik/koma') }}
+                    @error('biaya')
+                    <div class="invalid-feedback">{{ $errors->first('biaya') }}</div>
+                    @enderror
+                </div>
             </div>
 
 
             <!-- Text Field Input for Komentar -->
-            <div class="form-group">
-                <label class="form-label" for="komentar">Komentar</label>
-                {{ html()->textarea('komentar')->value($review->komentar)->class(["form-control", "is-invalid" => $errors->has('komentar')])->id('komentar')->placeholder('Tuliskan komentar Anda terhadap penelitian penelitian ini') }}
-                @error('komentar')
-                <div class="invalid-feedback">{{ $errors->first('komentar') }}</div>
-                @enderror
+            <div class='form-group row'>
+                <label class="col-md-3 col-form-label" for="komentar">Komentar</label>
+                <div class="col-md-9">
+                    {{ html()->textarea('komentar')->value($review->komentar)->class(["form-control", "is-invalid" => $errors->has('komentar')])->id('komentar')->placeholder('Tuliskan komentar Anda terhadap penelitian penelitian ini') }}
+                    @error('komentar')
+                    <div class="invalid-feedback">{{ $errors->first('komentar') }}</div>
+                    @enderror
+                </div>
             </div>
 
         </div>
@@ -181,9 +189,9 @@
 @endsection
 
 @section('styles')
-<style>
-.form-label{
-	font-weight:bold;
-}
-</style>
+    <style>
+        .col-form-label {
+            font-weight: bold;
+        }
+    </style>
 @endsection
