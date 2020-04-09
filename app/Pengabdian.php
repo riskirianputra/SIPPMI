@@ -59,6 +59,11 @@ class Pengabdian extends Model
         return $this->belongsTo(Usulan::class, 'id', 'id');
     }
 
+    public function usulanAnggotumWithPengabdianId()
+    {
+        return $this->hasMany(UsulanAnggotum::class, 'usulan_id', 'pengabdian_id');
+    }
+
 
     public function pengabdianPengabdianOutputs()
     {

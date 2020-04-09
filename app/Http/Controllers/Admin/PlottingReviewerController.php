@@ -6,6 +6,7 @@ use App\Dosen;
 use App\Http\Controllers\Controller;
 use App\Penelitian;
 use App\PenelitianReviewer;
+use App\Pengabdian;
 use App\RefSkema;
 use App\Reviewer;
 use App\TahapanReview;
@@ -55,32 +56,60 @@ class PlottingReviewerController extends Controller
         $skemas = RefSkema::all()
             ->pluck('nama', 'id');
 
+        $skema = RefSkema::findOrFail($request->skema);
+
         $tahapans = TahapanReview::where('id',$request->tahapan)->get();
-        $penelitian = Penelitian::with(['usulanAnggotumWithPenelitianId' => function($query)
-        {
-            $query->where('jabatan', 1);
-        }])->select('id as penelitian_id','judul','skema_id')->get()->filter(function ($value) use ($request){
-            return $value->skema_id == $request->skema;
-        });
+        if($skema->jenis_usulan == Usulan::PENELITIAN) {
+            $penelitian = Penelitian::with(['usulanAnggotumWithPenelitianId' => function ($query) {
+                $query->where('jabatan', 1);
+            }])->select('id as penelitian_id', 'judul', 'skema_id')->get()->filter(function ($value) use ($request) {
+                return $value->skema_id == $request->skema;
+            });
 
-        $penelitian = $penelitian->each(function ($p){
-            $p->peneliti = $p->usulanAnggotumWithPenelitianId[0]->dosen->nama;
-        });
+            $penelitian = $penelitian->each(function ($p) {
+                $p->peneliti = $p->usulanAnggotumWithPenelitianId[0]->dosen->nama;
+            });
 
-        $tahapans = $tahapans->crossJoin($penelitian)->map(function ($item,$key) {
-            $tahapan = $item[0]->toArray();
-            $penelitian = $item[1]->toArray();
-            $tahapanPenelitian = collect($tahapan)->mergeRecursive($penelitian);
-            return $tahapanPenelitian;
-        });
+            $tahapans = $tahapans->crossJoin($penelitian)->map(function ($item, $key) {
+                $tahapan = $item[0]->toArray();
+                $penelitian = $item[1]->toArray();
+                $tahapanPenelitian = collect($tahapan)->mergeRecursive($penelitian);
+                return $tahapanPenelitian;
+            });
+            $tahapan_id = $request->tahapan;
+            $skema_id = $request->skema;
 
-        $tahapan_id = $request->tahapan;
-        $skema_id = $request->skema;
+            $plottedReviewer = PenelitianReviewer::all();
+            $jumlahReviewerMax = $tahapans->pluck('jumlah_reviewer')->max();
 
-        $plottedReviewer = PenelitianReviewer::all();
-        $jumlahReviewerMax = $tahapans->pluck('jumlah_reviewer')->max();
+            return view('admin.plottingReviewers.index',compact('tahapanRiview','skemas','tahapans','plottedReviewer','jumlahReviewerMax','tahapan_id','skema_id'));
+        }else if($skema->jenis_usulan == Usulan::PENGABDIAN){
+            $penelitian = Pengabdian::with(['usulanAnggotumWithPengabdianId' => function ($query) {
+                $query->where('jabatan', 1);
+            }])->select('id as pengabdian_id', 'judul', 'skema_id')->get()->filter(function ($value) use ($request) {
+                return $value->skema_id == $request->skema;
+            });
 
-        return view('admin.plottingReviewers.index',compact('tahapanRiview','skemas','tahapans','plottedReviewer','jumlahReviewerMax','tahapan_id','skema_id'));
+            $penelitian = $penelitian->each(function ($p) {
+                $p->peneliti = $p->usulanAnggotumWithPengabdianId[0]->dosen->nama;
+            });
+
+            $tahapans = $tahapans->crossJoin($penelitian)->map(function ($item, $key) {
+                $tahapan = $item[0]->toArray();
+                $penelitian = $item[1]->toArray();
+                $tahapanPenelitian = collect($tahapan)->mergeRecursive($penelitian);
+                return $tahapanPenelitian;
+            });
+
+            $tahapan_id = $request->tahapan;
+            $skema_id = $request->skema;
+
+            $plottedReviewer = PenelitianReviewer::all();
+            $jumlahReviewerMax = $tahapans->pluck('jumlah_reviewer')->max();
+
+            return view('admin.plottingReviewers.index_pengabdian',compact('tahapanRiview','skemas','tahapans','plottedReviewer','jumlahReviewerMax','tahapan_id','skema_id'));
+        }
+
     }
 
     public function plotReviewer(Request $request){
