@@ -127,6 +127,71 @@
             </li>
         @endcan
 
+        @can('monitoring')
+            <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
+                <span class="c-sidebar-nav-icon">
+                    <i class="cil-filter"></i>
+                </span>
+                    Monitoring</a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    @can('penelitian_view')
+                        <li class="c-sidebar-nav-item">
+                            <a class="c-sidebar-nav-link {{ request()->is('admin/penelitians') || request()->is('admin/penelitians/*') ? 'active' : '' }}"
+                               href="{{ route("admin.proposal-monitor.dosen-index") }}">
+                                Monitoring Proposal
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
+
+        @can('reviewer_view')
+            <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
+                <span class="c-sidebar-nav-icon">
+                    <i class="cil-3d"></i>
+                </span>Manajemen Review
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    @can('reviewer_view')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.reviewers.index") }}"
+                               class="c-sidebar-nav-link {{ request()->is('admin/reviewers') || request()->is('admin/reviewers/*') ? 'active' : '' }}">
+                                {{ trans('cruds.reviewer.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('plotting_reviewer_view')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{!! route('admin.plotting-reviewers.index') !!}"
+                               class="c-sidebar-nav-link {{ request()->is('admin/plotting-reviewers') || request()->is('admin/plotting-reviewers/*') ? 'active' : '' }}">
+                                {{ trans('cruds.plottingReviewer.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('tahapan_review_view')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.tahapan-reviews.index") }}"
+                               class="c-sidebar-nav-link {{ request()->is('admin/tahapan-reviews') || request()->is('admin/tahapan-reviews/*') ? 'active' : '' }}">
+                                {{ trans('cruds.tahapanReview.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
+
+        @can('review')
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link {{ request()->is('reviews') || request()->is('reviews/*') ? 'active' : '' }}"
+                   href="{{ route("reviews.index") }}">
+                <span class="c-sidebar-nav-icon">
+                    <i class="cil-school"></i>
+                </span>
+                    Review Penelitian
+                </a>
+            </li>
+        @endcan
         @can('referensi_view')
             <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <span class="c-sidebar-nav-icon">
@@ -185,52 +250,6 @@
             </li>
         @endcan
 
-        @can('reviewer_view')
-            <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
-                <span class="c-sidebar-nav-icon">
-                    <i class="cil-3d"></i>
-                </span>Manajemen Review
-                </a>
-                <ul class="c-sidebar-nav-dropdown-items">
-                    @can('reviewer_view')
-                        <li class="c-sidebar-nav-item">
-                            <a href="{{ route("admin.reviewers.index") }}"
-                               class="c-sidebar-nav-link {{ request()->is('admin/reviewers') || request()->is('admin/reviewers/*') ? 'active' : '' }}">
-                                {{ trans('cruds.reviewer.title') }}
-                            </a>
-                        </li>
-                    @endcan
-                    @can('plotting_reviewer_view')
-                        <li class="c-sidebar-nav-item">
-                            <a href="{!! route('admin.plotting-reviewers.index') !!}"
-                               class="c-sidebar-nav-link {{ request()->is('admin/plotting-reviewers') || request()->is('admin/plotting-reviewers/*') ? 'active' : '' }}">
-                                {{ trans('cruds.plottingReviewer.title') }}
-                            </a>
-                        </li>
-                    @endcan
-                    @can('tahapan_review_view')
-                        <li class="c-sidebar-nav-item">
-                            <a href="{{ route("admin.tahapan-reviews.index") }}"
-                               class="c-sidebar-nav-link {{ request()->is('admin/tahapan-reviews') || request()->is('admin/tahapan-reviews/*') ? 'active' : '' }}">
-                                {{ trans('cruds.tahapanReview.title') }}
-                            </a>
-                        </li>
-                    @endcan
-                </ul>
-            </li>
-        @endcan
-
-        @can('review')
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link {{ request()->is('reviews') || request()->is('reviews/*') ? 'active' : '' }}"
-                   href="{{ route("reviews.index") }}">
-                <span class="c-sidebar-nav-icon">
-                    <i class="cil-school"></i>
-                </span>
-                    Review Penelitian
-                </a>
-            </li>
-            @endcan
 
     </ul>
     <button

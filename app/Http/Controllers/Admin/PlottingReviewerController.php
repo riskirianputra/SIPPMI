@@ -22,8 +22,7 @@ class PlottingReviewerController extends Controller
         abort_if(Gate::denies('plotting_reviewer_view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $tahapanRiview = TahapanReview::where('tahun', Carbon::now()->year)
             ->pluck('nama','id');
-        $skemas = RefSkema::where('jenis_usulan', Usulan::PENELITIAN)
-            ->get()
+        $skemas = RefSkema::all()
             ->pluck('nama', 'id');
 
         $tahapans = TahapanReview::all();
@@ -53,8 +52,7 @@ class PlottingReviewerController extends Controller
         abort_if(Gate::denies('plotting_reviewer_view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $tahapanRiview = TahapanReview::where('tahun', Carbon::now()->year)
             ->pluck('nama','id');
-        $skemas = RefSkema::where('jenis_usulan', Usulan::PENELITIAN)
-            ->get()
+        $skemas = RefSkema::all()
             ->pluck('nama', 'id');
 
         $tahapans = TahapanReview::where('id',$request->tahapan)->get();

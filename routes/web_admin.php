@@ -28,6 +28,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('penelitians/ckmedia', 'PenelitianController@storeCKEditorImages')->name('penelitians.storeCKEditorImages');
     Route::resource('penelitians', 'PenelitianController');
 
+    Route::get('proposal-monitor/rekap-dosen', 'ProposalMonitoringController@dosen_index')->name('proposal-monitor.dosen-index');
+    Route::post('proposal-monitor/rekap-dosen', 'ProposalMonitoringController@dosen_filter')->name('propsosal-monitor.dosen-filter');
+
     // Pengabdians
     Route::post('pengabdians/filter', 'PengabdianController@filter')->name('pengabdians.filter');
     Route::delete('pengabdians/destroy', 'PengabdianController@massDestroy')->name('pengabdians.massDestroy');
