@@ -5,16 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Dosen;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
-use App\Http\Requests\MassDestroyReviewerRequest;
 use App\Http\Requests\StoreReviewerRequest;
 use App\Http\Requests\UpdateReviewerRequest;
-use App\Permission;
 use App\Reviewer;
 use App\Role;
 use Gate;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
 class ReviewerController extends Controller

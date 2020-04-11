@@ -41,6 +41,11 @@ class Pengabdian extends Model
             ->where('jabatan', 2)->where('tipe', 1);
     }
 
+    public function reviewers()
+    {
+        return $this->hasMany(Review::class, 'usulan_id', 'id');
+    }
+
     public function anggota_mahasiswas()
     {
         return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')

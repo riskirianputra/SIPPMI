@@ -3,18 +3,18 @@
 @section('breadcrumb')
     {!! cui_breadcrumb([
         'Home' => route('admin.home'),
-        'List Usulan' => route('reviews.index'),
+        'List Usulan' => route('review-penelitians.index'),
         'Penilaian' => '#'
     ]) !!}
 @endsection
 
 @section('toolbar')
-    {!! cui_toolbar_btn(route('reviews.index'), 'cil-list') !!}
+    {!! cui_toolbar_btn(route('review-penelitians.index'), 'cil-list') !!}
 @endsection
 
 @section('content')
 
-    {{ html()->form('PUT', route('reviews.update', [$penelitian->id]))->open() }}
+    {{ html()->form('PATCH', route('review-penelitians.update', [$penelitian->id]))->open() }}
 
 
     <div class="card">

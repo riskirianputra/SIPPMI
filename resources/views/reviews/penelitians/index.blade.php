@@ -16,18 +16,9 @@
     <div class="card">
         <div class="card-header">Filter Pencarian</div>
 
-        {{ html()->form('POST', route('reviews.filter'))->open() }}
+        {{ html()->form('POST', route('review-penelitians.filter'))->open() }}
 
         <div class="card-body">
-
-            <!-- Input (Select) Tipe -->
-            <div class="form-group">
-                <label class="form-label" for="tipe">Tipe</label>
-                {{ html()->select('tipe')->options($tipes)->class(["form-control", "is-invalid" => $errors->has('tipe')])->id('tipe') }}
-                @error('tipe')
-                <div class="invalid-feedback">{{ $errors->first('tipe') }}</div>
-                @enderror
-            </div>
 
             <!-- Input (Select) Skema Usulan -->
             <div class="form-group">
@@ -46,7 +37,6 @@
                 <div class="invalid-feedback">{{ $errors->first('tahapan_review_id') }}</div>
                 @enderror
             </div>
-
 
         </div>
 
@@ -97,7 +87,7 @@
                             </h4>
                         </td>
                         <td class="text-center align-top">
-                            {!! cui()->btn_edit(route('reviews.edit', [$usulan->id])) !!}
+                            {!! cui()->btn_edit(route('review-penelitians.edit', [$usulan->id])) !!}
                         </td>
                     </tr>
 

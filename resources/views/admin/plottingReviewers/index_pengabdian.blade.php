@@ -101,7 +101,7 @@
                                     </tr>
                                 @empty
                                     data tidak ada
-                                @endempty
+                                @endforelse
                                 </tbody>
                             </table>
                         </div>

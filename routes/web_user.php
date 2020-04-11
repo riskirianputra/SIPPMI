@@ -24,8 +24,14 @@ Route::post('pengabdian/{id}/anggota/mahasiswa-store','PengabdianAnggotaControll
 Route::resource('prn-fokus', 'PrnFokusController');
 Route::delete('prn-fokus/destroy', 'PrnFokusController@massDestroy')->name('prn-fokus.massDestroy');
 
-Route::resource('reviews', 'ReviewController');
-Route::get('reviews', 'ReviewController@index')->name('reviews.index');
-Route::post('reviews/filter', 'ReviewController@filter')->name('reviews.filter');
-Route::get('reviews/{usulan}/edit', 'ReviewController@edit')->name('reviews.edit');
-Route::patch('reviews/{usulan}', 'ReviewController@update')->name('reviews.update');
+//Route::resource('review-penelitians', 'ReviewPenelitianController');
+Route::get('review-penelitians', 'ReviewPenelitianController@index')->name('review-penelitians.index');
+Route::post('review-penelitians/filter', 'ReviewPenelitianController@filter')->name('review-penelitians.filter');
+Route::get('review-penelitians/{usulan}/edit', 'ReviewPenelitianController@edit')->name('review-penelitians.edit');
+Route::patch('review-penelitians/{usulan}', 'ReviewPenelitianController@update')->name('review-penelitians.update');
+
+//Route::resource('review-pengabdians', 'ReviewPengabdianController');
+Route::get('review-pengabdians', 'ReviewPengabdianController@index')->name('review-pengabdians.index');
+Route::post('review-pengabdians/filter', 'ReviewPengabdianController@filter')->name('review-pengabdians.filter');
+Route::get('review-pengabdians/{usulan}/edit', 'ReviewPengabdianController@edit')->name('review-pengabdians.edit');
+Route::patch('review-pengabdians/{usulan}', 'ReviewPengabdianController@update')->name('review-pengabdians.update');

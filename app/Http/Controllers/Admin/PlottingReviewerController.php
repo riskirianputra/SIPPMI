@@ -13,7 +13,6 @@ use App\TahapanReview;
 use App\Usulan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Gate;
 

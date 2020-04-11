@@ -181,17 +181,30 @@
             </li>
         @endcan
 
+
         @can('review')
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link {{ request()->is('reviews') || request()->is('reviews/*') ? 'active' : '' }}"
-                   href="{{ route("reviews.index") }}">
+            <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <span class="c-sidebar-nav-icon">
-                    <i class="cil-school"></i>
-                </span>
-                    Review Penelitian
+                    <i class="cil-3d"></i>
+                </span>Review Usulan
                 </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    <li class="c-sidebar-nav-item">
+                        <a href="{{ route("review-penelitians.index") }}"
+                            class="c-sidebar-nav-link {{ request()->is('review-penelitians.index') || request()->is('review-penelitians/*') ? 'active' : '' }}">
+                            Penelitian
+                        </a>
+                    </li>
+                    <li class="c-sidebar-nav-item">
+                        <a href="{!! route('review-pengabdians.index') !!}"
+                           class="c-sidebar-nav-link {{ request()->is('review-pengabdians.index') || request()->is('review-pengabdians/*') ? 'active' : '' }}">
+                            Pengabdian
+                        </a>
+                    </li>
+                </ul>
             </li>
         @endcan
+
         @can('referensi_view')
             <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <span class="c-sidebar-nav-icon">
@@ -231,13 +244,14 @@
                             </a>
                         </li>
                     @endcan
-                   @can('prn_fokus_view')
-                   <li class="nav-item">
-                      <a href="{{ route("prn-fokus.index") }}" class="c-sidebar-nav-link {{ request()->is('prn-fokus') || request()->is('prn-fokus/*') ? 'active' : '' }}">
-                        Bidang Fokus
-                    </a>
-                </li>
-            @endcan
+                    @can('prn_fokus_view')
+                        <li class="nav-item">
+                            <a href="{{ route("prn-fokus.index") }}"
+                               class="c-sidebar-nav-link {{ request()->is('prn-fokus') || request()->is('prn-fokus/*') ? 'active' : '' }}">
+                                Bidang Fokus
+                            </a>
+                        </li>
+                    @endcan
                     @can('output_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.outputs.index") }}"
