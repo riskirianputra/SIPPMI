@@ -16,7 +16,7 @@
     <div class="card">
         <div class="card-header">Filter Pencarian</div>
 
-        {{ html()->form('POST', route('review-penelitians.filter'))->open() }}
+        {{ html()->form('POST', route('review-pengabdians.filter'))->open() }}
 
         <div class="card-body">
 

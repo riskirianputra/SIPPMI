@@ -26,12 +26,15 @@ class ReviewPenelitianController extends Controller
 
         if (session()->has('review_params')) {
             $params = session()->get('review_params');
-            $usulans = $this->_filter($params['tahapan'], $params['skema']);
+            $skema = RefSkema::find($params['skema']);
+            if ($skema->jenis_usulan == Usulan::PENGABDIAN) {
+                $usulans = $this->_filter($params['tahapan'], $params['skema']);
+            }
         }
 
         $user_id = auth()->user()->id;
 
-        $tahapans = TahapanReview::where('mulai' , '<=', Carbon::now()->toDateString())
+        $tahapans = TahapanReview::where('mulai', '<=', Carbon::now()->toDateString())
             ->where('selesai', '>=', Carbon::now()->toDateString())
             ->pluck('nama', 'id');
 
@@ -44,7 +47,7 @@ class ReviewPenelitianController extends Controller
             ->get()
             ->pluck('nama', 'id');
 
-        if($tahapans->count() > 0 && $skemas->count() > 0) {
+        if ($tahapans->count() > 0 && $skemas->count() > 0) {
             return view('reviews.penelitians.index', compact('usulans', 'tahapans', 'skemas', 'user_id'));
         }
         return view('reviews.penelitians.noreview');
@@ -63,7 +66,7 @@ class ReviewPenelitianController extends Controller
 
         $user_id = auth()->user()->id;
 
-        $tahapans = TahapanReview::where('mulai' , '<=', Carbon::now()->toDateString())
+        $tahapans = TahapanReview::where('mulai', '<=', Carbon::now()->toDateString())
             ->where('selesai', '>=', Carbon::now()->toDateString())
             ->pluck('nama', 'id');
 
@@ -76,7 +79,7 @@ class ReviewPenelitianController extends Controller
             ->get()
             ->pluck('nama', 'id');
 
-        if($tahapans->count() > 0 && $skemas->count() > 0) {
+        if ($tahapans->count() > 0 && $skemas->count() > 0) {
             return view('reviews.penelitians.index', compact('usulans', 'tahapans', 'skemas', 'user_id'));
         }
         return view('reviews.penelitians.noreview');

@@ -159,6 +159,6 @@ class PlottingReviewerController extends Controller
     {
         abort_if(Gate::denies('plotting_reviewer_view'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $reviewers = Reviewer::all();
-        return view('admin.plottingReviewers.rekapitulasi', compact('reviewers'));
+        return view('admins.reviews.plottings.rekapitulasi', compact('reviewers'));
     }
 }

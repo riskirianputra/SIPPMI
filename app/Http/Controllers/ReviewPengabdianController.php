@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Pengabdian;
+use App\RefSkema;
 use App\RefSkemaQuestion;
 use App\Review;
 use App\ReviewPenilaian;
 use App\TahapanReview;
+use App\Usulan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -24,7 +26,10 @@ class ReviewPengabdianController extends Controller
 
         if (session()->has('review_params')) {
             $params = session()->get('review_params');
-            $usulans = $this->_filter($params['tahapan'], $params['skema']);
+            $skema = RefSkema::find($params['skema']);
+            if($skema->jenis_usulan == Usulan::PENGABDIAN) {
+                $usulans = $this->_filter($params['tahapan'], $params['skema']);
+            }
         }
 
         $user_id = auth()->user()->id;
