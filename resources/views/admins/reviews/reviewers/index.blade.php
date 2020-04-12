@@ -1,11 +1,13 @@
 @extends('layouts.admin')
+
 @section('breadcrumb')
     {!! cui_breadcrumb([
         'Home' => route('admin.home'),
         'Reviewer' => route('admin.reviewers.index'),
         'Index' => '#'
     ]) !!}
-@stop
+@endsection
+
 @section('content')
 <div class="col">
     <div class="row">
@@ -15,7 +17,7 @@
                     {!! trans('global.add').' '.trans('cruds.reviewer.title_singular') !!}
                 </div>
                 <div class="card-body">
-                    @include('admin.reviewers.create')
+                    @include('admins.reviews.reviewers.create')
                 </div>
             </div>
             <div class="card">
@@ -31,13 +33,13 @@
                                 <th>
                                     {{ trans('cruds.dosen.fields.nama') }}
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     {{ trans('cruds.dosen.fields.nidn') }}
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     {{ trans('cruds.reviewer.fields.status') }}
                                 </th>
-                                <th>
+                                <th class="text-center">
                                     Action
                                 </th>
                             </tr>
@@ -48,10 +50,10 @@
                                     <td>
                                         {!! $reviewer->dosen->nama !!}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         {!! $reviewer->dosen->nidn !!}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         @can('reviewer_manage')
                                             @if($reviewer->status == 1)
                                                 {!! cui_btn_deactive($reviewer, route('admin.reviewers.update',[$reviewer->id]), 'deactive') !!}
@@ -60,7 +62,7 @@
                                             @endif
                                         @endcan
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         @can('reviewer_manage')
                                             {!! cui_btn_delete(route('admin.reviewers.destroy', [$reviewer->id]), "Anda yakin akan menghapus data Reviewer ini?") !!}
                                         @endcan

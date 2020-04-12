@@ -27,7 +27,7 @@ class ReviewerController extends Controller
         $dosens = Dosen::whereNotIn('id',$reviewersDosens)
             ->pluck('nama','id');
 
-        return view('admin.reviewers.index', compact('reviewers','dosens'));
+        return view('admins.reviews.reviewers.index', compact('reviewers','dosens'));
     }
 
 
@@ -46,7 +46,6 @@ class ReviewerController extends Controller
     public function update(UpdateReviewerRequest $request, $id)
     {
         $reviewer = Reviewer::findOrFail($id);
-//        dd([$request->status, $reviewer]);
         $reviewer->update($request->all());
         return redirect()->route('admin.reviewers.index');
     }

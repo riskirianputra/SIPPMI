@@ -1,29 +1,37 @@
 @extends('layouts.admin')
+
 @section('breadcrumb')
     {!! cui_breadcrumb([
         'Home' => route('admin.home'),
         'Plotting Reviewer' => route('admin.plotting-reviewers.index'),
         'Index' => '#'
     ]) !!}
-@stop
-@section('toolbar')
-    {!! cui_toolbar_btn(route('admin.plotting-reviewers.rekapitulasi'), 'icon-list', 'Rekapitulasi') !!}
 @endsection
+
+@section('toolbar')
+    {!! cui_toolbar_btn(route('admin.plotting-reviewers.rekapitulasi'), 'cil-spreadsheet', 'Rekapitulasi') !!}
+@endsection
+
 @section('content')
     <div class="col">
         <div class="row">
             <div class="col-sm-12">
+
                 <div class="card">
-                    <div class="card-header font-weight-bold">
-                        {!! trans('cruds.plottingReviewer.filter') !!}
-                    </div>
                     <div class="card-body">
-                        @include('admin.plottingReviewers.filter')
+
+                        <a class="btn btn-primary" data-toggle="collapse" href="#collapse-filter" role="button" aria-expanded="false" aria-controls="collapse-filter">
+                            Filter
+                        </a>
+                        <div class="collapse" id="collapse-filter">
+                        @include('admins.reviews.plottings.filter')
+                        </div>
                     </div>
                 </div>
+
                 <div class="card">
                     <div class="card-header font-weight-bold">
-                        {{ trans('cruds.reviewer.title_singular') }} {{ trans('global.list') }}
+                        <h4>{{ optional($skema)->nama }} </h4>
                     </div>
 
                     <div class="card-body">
@@ -63,12 +71,12 @@
                                             @php($plotted = true)
                                             @if($i<$tahapan['jumlah_reviewer'])
                                                 @foreach($plottedReviewer as $key => $pr)
-                                                    @if($pr->tahapan_review_id == $tahapan['id'] && $pr->usulan_id == $tahapan['pengabdian_id'])
+                                                    @if($pr->tahapan_review_id == $tahapan['id'] && $pr->usulan_id == $tahapan['penelitian_id'])
                                                         <td>
                                                             {!! $pr->reviewer->dosen->nama !!}
                                                             <button
-                                                                id="delete-{!! $i !!}-{!! $tahapan['id'] !!}-{!! $tahapan['pengabdian_id'] !!}"
-                                                                data-delete-id="delete-{!! $i !!}-{!! $tahapan['id'] !!}-{!! $tahapan['pengabdian_id'] !!}"
+                                                                id="delete-{!! $i !!}-{!! $tahapan['id'] !!}-{!! $tahapan['penelitian_id'] !!}"
+                                                                data-delete-id="delete-{!! $i !!}-{!! $tahapan['id'] !!}-{!! $tahapan['penelitian_id'] !!}"
                                                                 data-plot-id="{!! $pr->id !!}"
                                                                 class='myDeleteButton btn btn-sm btn-outline-danger'><i
                                                                     class='fa fa-trash'></i></button>
@@ -82,10 +90,10 @@
                                                     <td>
                                                         <!-- Small modal -->
                                                         <button
-                                                            id="create-{!! $i !!}-{!! $tahapan['id'] !!}-{!! $tahapan['pengabdian_id'] !!}"
+                                                            id="create-{!! $i !!}-{!! $tahapan['id'] !!}-{!! $tahapan['penelitian_id'] !!}"
                                                             type="button" data-nomor-urut="{!! $i !!}"
                                                             data-tahapan-review-id="{!! $tahapan['id'] !!}"
-                                                            data-penelitian-id="{!! $tahapan['pengabdian_id'] !!}"
+                                                            data-penelitian-id="{!! $tahapan['penelitian_id'] !!}"
                                                             class="btn btn-sm btn-outline-success myModalButton"
                                                             data-toggle="modal" data-target="#myModal"><i
                                                                 class="fa fa-plus"></i></button>
@@ -101,7 +109,7 @@
                                     </tr>
                                 @empty
                                     data tidak ada
-                                @endforelse
+                                @endempty
                                 </tbody>
                             </table>
                         </div>

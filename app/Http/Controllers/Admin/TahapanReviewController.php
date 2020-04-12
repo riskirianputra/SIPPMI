@@ -19,14 +19,14 @@ class TahapanReviewController extends Controller
 
         $tahapanReviews = TahapanReview::all();
 
-        return view('admin.tahapanReviews.index', compact('tahapanReviews'));
+        return view('admins.reviews.tahapans.index', compact('tahapanReviews'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('tahapan_review_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.tahapanReviews.create');
+        return view('admins.reviews.tahapans.create');
     }
 
     public function store(StoreTahapanReviewRequest $request)
@@ -40,7 +40,7 @@ class TahapanReviewController extends Controller
     {
         abort_if(Gate::denies('tahapan_review_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.tahapanReviews.edit', compact('tahapanReview'));
+        return view('admins.reviews.tahapans.edit', compact('tahapanReview'));
     }
 
     public function update(UpdateTahapanReviewRequest $request, TahapanReview $tahapanReview)
@@ -56,7 +56,7 @@ class TahapanReviewController extends Controller
 
         $tahapanReview->load('tahapanReviewPenelitianReviewers');
 
-        return view('admin.tahapanReviews.show', compact('tahapanReview'));
+        return view('admins.reviews.tahapans.show', compact('tahapanReview'));
     }
 
     public function destroy(TahapanReview $tahapanReview)
