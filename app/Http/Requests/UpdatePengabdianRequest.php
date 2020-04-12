@@ -12,8 +12,6 @@ class UpdatePengabdianRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(Gate::denies('pengabdian_user_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         return true;
     }
 

@@ -158,8 +158,8 @@
                             </td>
                             <td class="text-center">
                                 {!! cui()->btn_view(route('admin.pengabdians.show', $pengabdian->id)) !!}
+                                {!! cui()->btn_edit(route('admin.pengabdians.edit', $pengabdian->id)) !!}
                                 @if($pengabdian->owner == auth()->user()->id)
-                                    {!! cui()->btn_edit(route('admin.pengabdians.edit', $pengabdian->id)) !!}
                                     {!! cui()->btn_delete(route('admin.pengabdians.destroy', $pengabdian->id), trans('global.areYouSure')) !!}
                                 @endif
                             </td>
