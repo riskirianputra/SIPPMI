@@ -12,8 +12,6 @@ class UpdatePenelitianRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(Gate::denies('penelitian_user_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         return true;
     }
 

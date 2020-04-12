@@ -19,16 +19,20 @@
     <link href="{{ asset('css/select2-coreui.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     @yield('styles')
+
 </head>
 
 <body class="c-app">
 
-@include('layouts.app.menu')
+@include("layouts.app.nav")
+@include('layouts.app.sidebar')
 
 {{--@include('layouts.app.sidebar')--}}
 
 <div class="c-wrapper">
+
     @include('layouts.app.header')
 
     <div style="padding-top: 20px" class="container-fluid">
@@ -39,14 +43,13 @@
                 </div>
             </div>
         @endif
-
-
     </div>
 
     <div class="c-body">
         <main class="c-main">
             <div class="container-fluid">
                 <div class="fade-in">
+
                     @if($errors->count() > 0)
                         <div class="alert alert-danger">
                             <ul class="list-unstyled">
@@ -62,7 +65,9 @@
             </div>
         </main>
     </div>
+
     @include('layouts.app.footer')
+
 </div>
 <!-- CoreUI and necessary plugins-->
 <script src="{{ asset('js/pace.min.js') }}" ></script>

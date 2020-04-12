@@ -1,12 +1,12 @@
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
-    <div class="c-sidebar-brand d-md-down-none">
-        <svg class="c-sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
-            <use xlink:href="assets/brand/coreui-pro.svg#full"></use>
-        </svg>
-        <svg class="c-sidebar-brand-minimized" width="46" height="46" alt="CoreUI Logo">
-            <use xlink:href="assets/brand/coreui-pro.svg#signet"></use>
-        </svg>
+
+    <div class="c-sidebar-brand">
+        <img class="c-sidebar-brand-full" src="{{ asset('assets/brand/coreui-pro-base-white.svg') }}" width="118"
+             height="46" alt="CoreUI Logo">
+        <img class="c-sidebar-brand-minimized" src="{{ asset('assets/brand/coreui-signet-white.svg') }}" width="118"
+             height="46" alt="CoreUI Logo">
     </div>
+
     <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="{{ url('/home') }}">
@@ -191,7 +191,7 @@
                 <ul class="c-sidebar-nav-dropdown-items">
                     <li class="c-sidebar-nav-item">
                         <a href="{{ route("review-penelitians.index") }}"
-                            class="c-sidebar-nav-link {{ request()->is('review-penelitians.index') || request()->is('review-penelitians/*') ? 'active' : '' }}">
+                           class="c-sidebar-nav-link {{ request()->is('review-penelitians.index') || request()->is('review-penelitians/*') ? 'active' : '' }}">
                             Penelitian
                         </a>
                     </li>
@@ -266,187 +266,12 @@
 
 
     </ul>
+
     <button
-        class="c-sidebar-minimizer c-class-toggler"
+        class="c-sidebar-minimizer
+        c-class-toggler"
         type="button"
         data-target="_parent"
-        data-class="c-sidebar-unfoldable"></button>
-
-
-    {{--                        @can('penelitian_output_access')--}}
-    {{--                            <li class="nav-item">--}}
-    {{--                                <a href="{{ route("admin.penelitian-outputs.index") }}" class="nav-link {{ request()->is('admin/penelitian-outputs') || request()->is('admin/penelitian-outputs/*') ? 'active' : '' }}">--}}
-    {{--                                    <i class="fa-fw fas fa-caret-right nav-icon">--}}
-
-    {{--                                    </i>--}}
-    {{--                                    {{ trans('cruds.penelitianOutput.title') }}--}}
-    {{--                                </a>--}}
-    {{--                            </li>--}}
-    {{--                        @endcan--}}
-    {{--                        @can('pengabdian_output_access')--}}
-    {{--                            <li class="nav-item">--}}
-    {{--                                <a href="{{ route("admin.pengabdian-outputs.index") }}" class="nav-link {{ request()->is('admin/pengabdian-outputs') || request()->is('admin/pengabdian-outputs/*') ? 'active' : '' }}">--}}
-    {{--                                    <i class="fa-fw fas fa-caret-right nav-icon">--}}
-
-    {{--                                    </i>--}}
-    {{--                                    {{ trans('cruds.pengabdianOutput.title') }}--}}
-    {{--                                </a>--}}
-    {{--                            </li>--}}
-    {{--                        @endcan--}}
-    {{--                    </ul>--}}
-    {{--                </li>--}}
-    {{--            @endcan--}}
-    {{--            @can('rencana_induk_access')--}}
-    {{--                <li class="nav-item nav-dropdown">--}}
-    {{--                    <a class="nav-link  nav-dropdown-toggle" href="#">--}}
-    {{--                        <i class="fa-fw fas fa-cogs nav-icon">--}}
-
-
-    {{--                        </i>--}}
-    {{--                        {{ trans('cruds.rencanaInduk.title') }}--}}
-    {{--                    </a>--}}
-    {{--                    <ul class="nav-dropdown-items">--}}
-    {{--                        @can('rip_tema_access')--}}
-    {{--                            <li class="nav-item">--}}
-    {{--                                <a href="{{ route("admin.rip-temas.index") }}" class="nav-link {{ request()->is('admin/rip-temas') || request()->is('admin/rip-temas/*') ? 'active' : '' }}">--}}
-    {{--                                    <i class="fa-fw fas fa-cogs nav-icon">--}}
-
-    {{--                                    </i>--}}
-    {{--                                    {{ trans('cruds.ripTema.title') }}--}}
-    {{--                                </a>--}}
-    {{--                            </li>--}}
-    {{--                        @endcan--}}
-    {{--                        @can('rip_sub_tema_access')--}}
-    {{--                            <li class="nav-item">--}}
-    {{--                                <a href="{{ route("admin.rip-sub-temas.index") }}" class="nav-link {{ request()->is('admin/rip-sub-temas') || request()->is('admin/rip-sub-temas/*') ? 'active' : '' }}">--}}
-    {{--                                    <i class="fa-fw fas fa-cogs nav-icon">--}}
-
-    {{--                                    </i>--}}
-    {{--                                    {{ trans('cruds.ripSubTema.title') }}--}}
-    {{--                                </a>--}}
-    {{--                            </li>--}}
-    {{--                        @endcan--}}
-    {{--                        @can('rip_topik_access')--}}
-    {{--                            <li class="nav-item">--}}
-    {{--                                <a href="{{ route("admin.rip-topiks.index") }}" class="nav-link {{ request()->is('admin/rip-topiks') || request()->is('admin/rip-topiks/*') ? 'active' : '' }}">--}}
-    {{--                                    <i class="fa-fw fas fa-cogs nav-icon">--}}
-
-    {{--                                    </i>--}}
-    {{--                                    {{ trans('cruds.ripTopik.title') }}--}}
-    {{--                                </a>--}}
-    {{--                            </li>--}}
-    {{--                        @endcan--}}
-    {{--                        @can('rip_sub_topik_access')--}}
-    {{--                            <li class="nav-item">--}}
-    {{--                                <a href="{{ route("admin.rip-sub-topiks.index") }}" class="nav-link {{ request()->is('admin/rip-sub-topiks') || request()->is('admin/rip-sub-topiks/*') ? 'active' : '' }}">--}}
-    {{--                                    <i class="fa-fw fas fa-cogs nav-icon">--}}
-
-    {{--                                    </i>--}}
-    {{--                                    {{ trans('cruds.ripSubTopik.title') }}--}}
-    {{--                                </a>--}}
-    {{--                            </li>--}}
-    {{--                        @endcan--}}
-    {{--                        @can('rip_tahapan_access')--}}
-    {{--                            <li class="nav-item">--}}
-    {{--                                <a href="{{ route("admin.rip-tahapans.index") }}" class="nav-link {{ request()->is('admin/rip-tahapans') || request()->is('admin/rip-tahapans/*') ? 'active' : '' }}">--}}
-    {{--                                    <i class="fa-fw fas fa-cogs nav-icon">--}}
-
-    {{--                                    </i>--}}
-    {{--                                    {{ trans('cruds.ripTahapan.title') }}--}}
-    {{--                                </a>--}}
-    {{--                            </li>--}}
-    {{--                        @endcan--}}
-    {{--                    </ul>--}}
-    {{--                </li>--}}
-    {{--            @endcan--}}
-    {{--            @can('konfigurasi_access')--}}
-    {{--                <li class="nav-item nav-dropdown">--}}
-    {{--                    <a class="nav-link  nav-dropdown-toggle" href="#">--}}
-    {{--                        <i class="fa-fw fas fa-cogs nav-icon">--}}
-
-    {{--                        </i>--}}
-    {{--                        {{ trans('cruds.konfigurasi.title') }}--}}
-    {{--                    </a>--}}
-    {{--                    <ul class="nav-dropdown-items">--}}
-    {{--                        @can('komponen_biaya_access')--}}
-    {{--                            <li class="nav-item">--}}
-    {{--                                <a href="{{ route("admin.komponen-biayas.index") }}" class="nav-link {{ request()->is('admin/komponen-biayas') || request()->is('admin/komponen-biayas/*') ? 'active' : '' }}">--}}
-    {{--                                    <i class="fa-fw fas fa-cogs nav-icon">--}}
-
-    {{--                                    </i>--}}
-    {{--                                    {{ trans('cruds.komponenBiaya.title') }}--}}
-    {{--                                </a>--}}
-    {{--                            </li>--}}
-    {{--                        @endcan--}}
-    {{--                        @can('biaya_skema_access')--}}
-    {{--                            <li class="nav-item">--}}
-    {{--                                <a href="{{ route("admin.biaya-skemas.index") }}" class="nav-link {{ request()->is('admin/biaya-skemas') || request()->is('admin/biaya-skemas/*') ? 'active' : '' }}">--}}
-    {{--                                    <i class="fa-fw fas fa-cogs nav-icon">--}}
-
-    {{--                                    </i>--}}
-    {{--                                    {{ trans('cruds.biayaSkema.title') }}--}}
-    {{--                                </a>--}}
-    {{--                            </li>--}}
-    {{--                        @endcan--}}
-    {{--                    </ul>--}}
-    {{--                </li>--}}
-    {{--            @endcan--}}
-    {{--            @can('konfigurasi_reviewer_access')--}}
-    {{--                <li class="nav-item nav-dropdown">--}}
-    {{--                    <a class="nav-link  nav-dropdown-toggle" href="#">--}}
-    {{--                        <i class="fa-fw fas fa-cogs nav-icon">--}}
-
-    {{--                        </i>--}}
-    {{--                        {{ trans('cruds.konfigurasiReviewer.title') }}--}}
-    {{--                    </a>--}}
-    {{--                    <ul class="nav-dropdown-items">--}}
-    {{--                        @can('reviewer_access')--}}
-    {{--                            <li class="nav-item">--}}
-    {{--                                <a href="{{ route("admin.reviewers.index") }}" class="nav-link {{ request()->is('admin/reviewers') || request()->is('admin/reviewers/*') ? 'active' : '' }}">--}}
-    {{--                                    <i class="fa-fw fas fa-cogs nav-icon">--}}
-
-    {{--                                    </i>--}}
-    {{--                                    {{ trans('cruds.reviewer.title') }}--}}
-    {{--                                </a>--}}
-    {{--                            </li>--}}
-    {{--                        @endcan--}}
-    {{--                        @can('tahapan_review_access')--}}
-    {{--                            <li class="nav-item">--}}
-    {{--                                <a href="{{ route("admin.tahapan-reviews.index") }}" class="nav-link {{ request()->is('admin/tahapan-reviews') || request()->is('admin/tahapan-reviews/*') ? 'active' : '' }}">--}}
-    {{--                                    <i class="fa-fw fas fa-cogs nav-icon">--}}
-
-    {{--                                    </i>--}}
-    {{--                                    {{ trans('cruds.tahapanReview.title') }}--}}
-    {{--                                </a>--}}
-    {{--                            </li>--}}
-    {{--                        @endcan--}}
-    {{--                        @can('penelitian_reviewer_access')--}}
-    {{--                            <li class="nav-item">--}}
-    {{--                                <a href="{{ route("admin.penelitian-reviewers.index") }}" class="nav-link {{ request()->is('admin/penelitian-reviewers') || request()->is('admin/penelitian-reviewers/*') ? 'active' : '' }}">--}}
-    {{--                                    <i class="fa-fw fas fa-cogs nav-icon">--}}
-
-    {{--                                    </i>--}}
-    {{--                                    {{ trans('cruds.penelitianReviewer.title') }}--}}
-    {{--                                </a>--}}
-    {{--                            </li>--}}
-    {{--                        @endcan--}}
-    {{--                    </ul>--}}
-    {{--                </li>--}}
-    {{--            @endcan--}}
-    {{--            <li class="nav-item">--}}
-    {{--                <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">--}}
-    {{--                    <i class="nav-icon fas fa-fw fa-sign-out-alt">--}}
-
-    {{--                    </i>--}}
-    {{--                    {{ trans('global.logout') }}--}}
-    {{--                </a>--}}
-    {{--            </li>--}}
-
-
-    {{--        </ul>--}}
-
-    {{--    </nav>--}}
-    {{--    <button class="sidebar-minimizer brand-minimizer" type="button"></button>--}}
-    {{--</div>--}}
-
+        data-class="c-sidebar-unfoldable">
+    </button>
 </div>

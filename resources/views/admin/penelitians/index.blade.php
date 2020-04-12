@@ -162,8 +162,8 @@
                             </td>
                             <td class="text-center">
                                 {!! cui()->btn_view(route('admin.penelitians.show', $penelitian->id)) !!}
+                                {!! cui()->btn_edit(route('admin.penelitians.edit', $penelitian->id)) !!}
                                 @if($penelitian->owner == auth()->user()->id)
-                                    {!! cui()->btn_edit(route('admin.penelitians.edit', $penelitian->id)) !!}
                                     {!! cui()->btn_delete(route('admin.penelitians.destroy', $penelitian->id), trans('global.areYouSure')) !!}
                                 @endif
 

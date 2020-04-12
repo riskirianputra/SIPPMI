@@ -10,6 +10,7 @@ use App\Http\Requests\StorePenelitianRequest;
 use App\Http\Requests\UpdatePenelitianRequest;
 use App\KodeRumpun;
 use App\Penelitian;
+use App\PrnFokus;
 use App\Prodi;
 use App\RefSkema;
 use App\RipTahapan;
@@ -142,62 +143,20 @@ class PenelitianController extends Controller
 
         $tahapans = RipTahapan::all()->pluck('tahun', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $penelitian->load('skema', 'kode_rumpun', 'prodi', 'tahapan', 'created_by');
+        $prnFokus = PrnFokus::pluck('nama','id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.penelitians.edit', compact('skemas', 'kode_rumpuns', 'prodis', 'tahapans', 'penelitian'));
+        $penelitian->load('skema', 'kode_rumpun', 'prodi', 'tahapan');
+
+        return view('admin.penelitians.edit', compact('skemas', 'kode_rumpuns', 'prodis', 'tahapans', 'penelitian', 'prnFokus'));
     }
 
     public function update(UpdatePenelitianRequest $request, Penelitian $penelitian)
     {
         $penelitian->update($request->all());
 
-        if ($request->input('file_proposal', false)) {
-            if (!$penelitian->file_proposal || $request->input('file_proposal') !== $penelitian->file_proposal->file_name) {
-                $penelitian->addMedia(storage_path('tmp/uploads/' . $request->input('file_proposal')))->toMediaCollection('file_proposal');
-            }
-        } elseif ($penelitian->file_proposal) {
-            $penelitian->file_proposal->delete();
-        }
-
-        if ($request->input('file_laporan_kemajuan', false)) {
-            if (!$penelitian->file_laporan_kemajuan || $request->input('file_laporan_kemajuan') !== $penelitian->file_laporan_kemajuan->file_name) {
-                $penelitian->addMedia(storage_path('tmp/uploads/' . $request->input('file_laporan_kemajuan')))->toMediaCollection('file_laporan_kemajuan');
-            }
-        } elseif ($penelitian->file_laporan_kemajuan) {
-            $penelitian->file_laporan_kemajuan->delete();
-        }
-
-        if ($request->input('file_laporan_keuangan', false)) {
-            if (!$penelitian->file_laporan_keuangan || $request->input('file_laporan_keuangan') !== $penelitian->file_laporan_keuangan->file_name) {
-                $penelitian->addMedia(storage_path('tmp/uploads/' . $request->input('file_laporan_keuangan')))->toMediaCollection('file_laporan_keuangan');
-            }
-        } elseif ($penelitian->file_laporan_keuangan) {
-            $penelitian->file_laporan_keuangan->delete();
-        }
-
-        if ($request->input('file_profil_penelitian', false)) {
-            if (!$penelitian->file_profil_penelitian || $request->input('file_profil_penelitian') !== $penelitian->file_profil_penelitian->file_name) {
-                $penelitian->addMedia(storage_path('tmp/uploads/' . $request->input('file_profil_penelitian')))->toMediaCollection('file_profil_penelitian');
-            }
-        } elseif ($penelitian->file_profil_penelitian) {
-            $penelitian->file_profil_penelitian->delete();
-        }
-
-        if ($request->input('file_laporan_akhir', false)) {
-            if (!$penelitian->file_laporan_akhir || $request->input('file_laporan_akhir') !== $penelitian->file_laporan_akhir->file_name) {
-                $penelitian->addMedia(storage_path('tmp/uploads/' . $request->input('file_laporan_akhir')))->toMediaCollection('file_laporan_akhir');
-            }
-        } elseif ($penelitian->file_laporan_akhir) {
-            $penelitian->file_laporan_akhir->delete();
-        }
-
-        if ($request->input('file_logbook', false)) {
-            if (!$penelitian->file_logbook || $request->input('file_logbook') !== $penelitian->file_logbook->file_name) {
-                $penelitian->addMedia(storage_path('tmp/uploads/' . $request->input('file_logbook')))->toMediaCollection('file_logbook');
-            }
-        } elseif ($penelitian->file_logbook) {
-            $penelitian->file_logbook->delete();
-        }
+        $this->addFile($penelitian, $request, 'file_pengesahan', config('sippmi.path.pengesahan'));
+        $this->addFile($penelitian, $request, 'file_proposal', config('sippmi.path.proposal'));
+        $this->addFile($penelitian, $request, 'file_cv', config('sippmi.path.cv'));
 
         return redirect()->route('admin.penelitians.index');
     }
