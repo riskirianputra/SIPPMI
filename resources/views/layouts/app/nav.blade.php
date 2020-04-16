@@ -134,14 +134,18 @@
                 </span>
                     Monitoring</a>
                 <ul class="c-sidebar-nav-dropdown-items">
-                    @can('penelitian_view')
-                        <li class="c-sidebar-nav-item">
-                            <a class="c-sidebar-nav-link {{ request()->is('admin/penelitians') || request()->is('admin/penelitians/*') ? 'active' : '' }}"
-                               href="{{ route("admin.proposal-monitor.dosen-index") }}">
-                                Monitoring Proposal
-                            </a>
-                        </li>
-                    @endcan
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link {{ request()->is('admin/penelitians') || request()->is('admin/penelitians/*') ? 'active' : '' }}"
+                           href="{{ route("admin.proposal-monitor.dosen-index") }}">
+                            Monitoring Proposal
+                        </a>
+                    </li>
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link {{ request()->is('admin.monitoring-reviews') || request()->is('admin.monitoring-reviews/*') ? 'active' : '' }}"
+                           href="{{ route("admin.monitoring-reviews.progress") }}">
+                            Monitoring Review
+                        </a>
+                    </li>
                 </ul>
             </li>
         @endcan

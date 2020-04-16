@@ -31,6 +31,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('proposal-monitor/rekap-dosen', 'ProposalMonitoringController@dosen_index')->name('proposal-monitor.dosen-index');
     Route::post('proposal-monitor/rekap-dosen', 'ProposalMonitoringController@dosen_filter')->name('propsosal-monitor.dosen-filter');
 
+    Route::get('monitoring-reviews/index', 'MonitoringReviewController@progress')->name('monitoring-reviews.progress');
+    Route::post('monitoring-reviews/index', 'MonitoringReviewController@post_progress')->name('monitoring-reviews.post_progress');
+
     // Pengabdians
     Route::post('pengabdians/filter', 'PengabdianController@filter')->name('pengabdians.filter');
     Route::delete('pengabdians/destroy', 'PengabdianController@massDestroy')->name('pengabdians.massDestroy');

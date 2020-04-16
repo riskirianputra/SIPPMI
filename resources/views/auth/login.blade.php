@@ -6,7 +6,7 @@
 
             <div class="card">
                 <div class="card-body text-center">
-                    <h4>Sistem Informasi Penelitian, Pengabdian Masyakarat dan Inovasi</h4>
+                    <h4>Sistem Informasi Penelitian, Pengabdian Masyarakat dan Inovasi</h4>
                 </div>
             </div>
 
