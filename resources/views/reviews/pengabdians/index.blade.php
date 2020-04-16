@@ -87,7 +87,7 @@
                             </h4>
                         </td>
                         <td class="text-center align-top">
-                            {!! cui()->btn_edit(route('review-penelitians.edit', [$usulan->id])) !!}
+                            {!! cui()->btn_edit(route('review-pengabdians.edit', [$usulan->id])) !!}
                         </td>
                     </tr>
 

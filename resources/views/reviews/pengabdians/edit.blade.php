@@ -3,18 +3,18 @@
 @section('breadcrumb')
     {!! cui_breadcrumb([
         'Home' => route('admin.home'),
-        'List Usulan' => route('review-penelitians.index'),
+        'List Usulan' => route('review-pengabdians.index'),
         'Penilaian' => '#'
     ]) !!}
 @endsection
 
 @section('toolbar')
-    {!! cui_toolbar_btn(route('review-penelitians.index'), 'cil-list') !!}
+    {!! cui_toolbar_btn(route('review-pengabdians.index'), 'cil-list') !!}
 @endsection
 
 @section('content')
 
-    {{ html()->form('PATCH', route('review-penelitians.update', [$penelitian->id]))->open() }}
+    {{ html()->form('PATCH', route('review-pengabdians.update', [$pengabdian->id]))->open() }}
 
 
     <div class="card">
@@ -27,7 +27,7 @@
             <div class="form-group row">
                 <div class='col-md-3 col-form-label'>Judul</div>
                 <div class="col-md-9">
-                    <div>{!! $penelitian->judul_text !!}</div>
+                    <div>{!! $pengabdian->judul_text !!}</div>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
             <div class='form-group row'>
                 <div class='col-md-3 col-form-label'>Skim</div>
                 <div class="col-md-9">
-                    <div>{{ $penelitian->skema->nama }}</div>
+                    <div>{{ $pengabdian->skema->nama }}</div>
                 </div>
             </div>
 
@@ -44,8 +44,8 @@
                 <div class='col-md-3 col-form-label'>Prodi/Fakultas</div>
                 <div class="col-md-9">
                     <div>
-                        {{ optional($penelitian->ketua[0]->dosen->prodi)->nama }} /
-                        {{ optional($penelitian->ketua[0]->dosen->prodi)->fakultas->nama }}
+                        {{ optional($pengabdian->ketua[0]->dosen->prodi)->nama }} /
+                        {{ optional($pengabdian->ketua[0]->dosen->prodi)->fakultas->nama }}
                     </div>
                 </div>
             </div>
@@ -54,9 +54,9 @@
             <div class='form-group row'>
                 <div class='col-md-3 col-form-label'>Ketua Peneliti</div>
                 <div class="col-md-9">
-                    <div>{{ optional($penelitian->ketua[0])->nama }}</div>
-                    <div>{{ optional($penelitian->ketua[0])->nidn }}</div>
-                    <div>{{ $penelitian->ketua[0]->dosen->fungsional_text }}</div>
+                    <div>{{ optional($pengabdian->ketua[0])->nama }}</div>
+                    <div>{{ optional($pengabdian->ketua[0])->nidn }}</div>
+                    <div>{{ $pengabdian->ketua[0]->dosen->fungsional_text }}</div>
                 </div>
             </div>
 
@@ -66,7 +66,7 @@
                 <div class='col-md-3 col-form-label'>Anggota (Dosen)</div>
                 <div class="col-md-9">
                     <ul>
-                        @foreach($penelitian->anggota_dosens as $dosen)
+                        @foreach($pengabdian->anggota_dosens as $dosen)
                             <li>{{ optional($dosen)->nama }} / <small> {{ optional($dosen)->nidn }}</small></li>
                         @endforeach
                     </ul>
@@ -77,7 +77,7 @@
                 <div class='col-md-3 col-form-label'>Anggota (Mahasiswa)</div>
                 <div class="col-md-9">
                     <ul>
-                        @foreach($penelitian->anggota_mahasiswas as $mahasiswa)
+                        @foreach($pengabdian->anggota_mahasiswas as $mahasiswa)
                             <li>{{ optional($mahasiswa)->nama }} / <small> {{ optional($mahasiswa)->nidn }}</small></li>
                         @endforeach
                     </ul>
@@ -92,19 +92,19 @@
                 <div class="col-sm-9">
                     <div class="row">
                         <div class="col-sm-3">
-                            <a href="{{ $penelitian->getFileProposalUrl() }}" target="_blank">
+                            <a href="{{ $pengabdian->getFileProposalUrl() }}" target="_blank">
                                 <i class="fa fa-file-pdf-o text-danger"></i>
                                 Proposal
                             </a>
                         </div>
                         <div class="col-sm-3">
-                            <a href="{{ $penelitian->getFileCvUrl() }}" target="_blank">
+                            <a href="{{ $pengabdian->getFileCvUrl() }}" target="_blank">
                                 <i class="fa fa-file-pdf-o text-danger"></i>
                                 CV
                             </a>
                         </div>
                         <div class="col-sm-3">
-                            <a href="{{ $penelitian->getFilePengesahanUrl() }}" target="_blank">
+                            <a href="{{ $pengabdian->getFilePengesahanUrl() }}" target="_blank">
                                 <i class="fa fa-file-pdf-o text-danger"></i>
                                 Lembaran Pengesahan
                             </a>
@@ -150,7 +150,7 @@
             <div class='form-group row'>
                 <div class='col-md-3 col-form-label'>Biaya Diusulkan</div>
                 <div class="col-md-9">
-                    <div> Rp {{ number_format($penelitian->biaya, 0, ',', '.') }}</div>
+                    <div> Rp {{ number_format($pengabdian->biaya, 0, ',', '.') }}</div>
                 </div>
             </div>
 
@@ -170,7 +170,7 @@
             <div class='form-group row'>
                 <label class="col-md-3 col-form-label" for="komentar">Komentar</label>
                 <div class="col-md-9">
-                    {{ html()->textarea('komentar')->value($review->komentar)->class(["form-control", "is-invalid" => $errors->has('komentar')])->id('komentar')->placeholder('Tuliskan komentar Anda terhadap penelitian penelitian ini') }}
+                    {{ html()->textarea('komentar')->value($review->komentar)->class(["form-control", "is-invalid" => $errors->has('komentar')])->id('komentar')->placeholder('Tuliskan komentar Anda terhadap pengabdian pengabdian ini') }}
                     @error('komentar')
                     <div class="invalid-feedback">{{ $errors->first('komentar') }}</div>
                     @enderror
