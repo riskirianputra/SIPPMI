@@ -6,6 +6,7 @@ use App\Exports\MonitoringReviewExport;
 use App\Exports\PenelitianExport;
 use App\Http\Controllers\Controller;
 use App\Penelitian;
+use App\Pengabdian;
 use App\RefSkema;
 use App\TahapanReview;
 use App\Usulan;
@@ -66,7 +67,7 @@ class MonitoringReviewController extends Controller
                 ->where('tahun', $tahun)
                 ->get();
         } else if ($jenis_usulan == Usulan::PENGABDIAN) {
-            $usulans = Penelitian::where('skema_id', $skema)
+            $usulans = Pengabdian::where('skema_id', $skema)
                 ->where('tahun', $tahun)
                 ->get();
         }
