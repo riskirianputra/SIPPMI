@@ -16,6 +16,7 @@
             <th>Nama<br>Reviewer #{{ $i }}</th>
             <th>Komentar<br>Reviewer #{{ $i }}</th>
             <th>Nilai<br>Reviewer #{{ $i }}</th>
+            <th>Biaya<br>Reviwer ${{ $i }}</th>
         @endfor
     </tr>
     </thead>
@@ -52,6 +53,7 @@
                 <td class="align-top">{{ $reviewer->dosen->nama }}</td>
                 <td class="align-top">{{ $reviewer->komentar }}</td>
                 <td class="align-top">{{ $reviewer->sub_total }}</td>
+                <td class="align-top">{{ $reviewer->biaya }}</td>
             @endforeach
         </tr>
     @endforeach
