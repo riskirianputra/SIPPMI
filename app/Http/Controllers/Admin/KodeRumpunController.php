@@ -19,14 +19,14 @@ class KodeRumpunController extends Controller
 
         $kodeRumpuns = KodeRumpun::all();
 
-        return view('admin.kodeRumpuns.index', compact('kodeRumpuns'));
+        return view('admins.referensis.kode_rumpuns.index', compact('kodeRumpuns'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('kode_rumpun_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.kodeRumpuns.create');
+        return view('admins.referensis.kode_rumpuns.create');
     }
 
     public function store(StoreKodeRumpunRequest $request)
@@ -40,7 +40,7 @@ class KodeRumpunController extends Controller
     {
         abort_if(Gate::denies('kode_rumpun_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.kodeRumpuns.edit', compact('kodeRumpun'));
+        return view('admins.referensis.kode_rumpuns.edit', compact('kodeRumpun'));
     }
 
     public function update(UpdateKodeRumpunRequest $request, KodeRumpun $kodeRumpun)
@@ -56,7 +56,7 @@ class KodeRumpunController extends Controller
 
         $kodeRumpun->load('kodeRumpunPenelitians', 'kodeRumpunPengabdians');
 
-        return view('admin.kodeRumpuns.show', compact('kodeRumpun'));
+        return view('admins.referensis.kode_rumpuns.show', compact('kodeRumpun'));
     }
 
     public function destroy(KodeRumpun $kodeRumpun)
