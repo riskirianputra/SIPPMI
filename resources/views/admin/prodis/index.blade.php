@@ -1,20 +1,23 @@
 @extends('layouts.admin')
+
 @section('breadcrumb')
     {!! cui_breadcrumb([
         'Home' => route('admin.home'),
         'Program Studi' => route('admin.prodis.index'),
         'Index' => '#'
     ]) !!}
-@stop
+@endsection
+
 @section('toolbar')
     @can('prodi_manage')
-        {!! cui_toolbar_btn(route('admin.prodis.create'), 'icon-plus', trans('global.add').' '.trans('cruds.prodi.title_singular') ) !!}
+        {!! cui_toolbar_btn(route('admin.prodis.create'), 'cil-plus', 'Tambah Program Studi') !!}
     @endcan
-@stop
+@endsection
+
 @section('content')
 <div class="card">
     <div class="card-header font-weight-bold">
-        {{ trans('cruds.prodi.title_singular') }} {{ trans('global.list') }}
+        <i class="cil-list"></i> {{ trans('global.list') }} {{ trans('cruds.prodi.title_singular') }}
     </div>
 
     <div class="card-body">
@@ -22,44 +25,23 @@
             <table class=" table table-bordered table-striped table-hover datatable datatable-Prodi" style="width: 100%">
                 <thead>
                     <tr>
-                        <th width="10">
-
-                        </th>
-                        <th>
-                            {{ trans('cruds.prodi.fields.id') }}
-                        </th>
-                        <th>
+                        <th class="text-center">
                             {{ trans('cruds.prodi.fields.nama') }}
                         </th>
-                        <th>
+                        <th class="text-center">
                             {{ trans('cruds.prodi.fields.fakultas') }}
                         </th>
-                        <th>
+                        <th class="text-center">
                             {{ trans('cruds.fakultum.fields.singkatan') }}
                         </th>
-                        <th>
-                            {{ trans('cruds.prodi.fields.kode') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.prodi.fields.kode_dikti') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.prodi.fields.akreditasi') }}
-                        </th>
-                        <th>
-                            &nbsp;
+                        <th class="text-center">
+                            Aksi
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($prodis as $key => $prodi)
                         <tr data-entry-id="{{ $prodi->id }}">
-                            <td>
-
-                            </td>
-                            <td>
-                                {{ $prodi->id ?? '' }}
-                            </td>
                             <td>
                                 {{ $prodi->nama ?? '' }}
                             </td>
@@ -69,23 +51,14 @@
                             <td>
                                 {{ $prodi->fakultas->singkatan ?? '' }}
                             </td>
-                            <td>
-                                {{ $prodi->kode ?? '' }}
-                            </td>
-                            <td>
-                                {{ $prodi->kode_dikti ?? '' }}
-                            </td>
-                            <td>
-                                {{ $prodi->akreditasi ?? '' }}
-                            </td>
-                            <td>
+                            <td class="text-center">
                                 @can('prodi_view')
-                                    {!! cui_btn_view(route('admin.prodis.show', [$prodi->id])) !!}
+                                    {!! cui()->btn_view(route('admin.prodis.show', $prodi->id)) !!}
                                 @endcan
 
                                 @can('prodi_manage')
-                                    {!! cui_btn_edit(route('admin.prodis.edit', [$prodi->id])) !!}
-                                    {!! cui_btn_delete(route('admin.prodis.destroy', [$prodi->id]), "Anda yakin akan menghapus data Program Studi ini?") !!}
+                                    {!! cui()->btn_edit(route('admin.prodis.edit', $prodi->id)) !!}
+                                    {!! cui()->btn_delete(route('admin.prodis.destroy', $prodi->id), "Anda yakin akan menghapus data Program Studi ini?") !!}
                                 @endcan
 
                             </td>
