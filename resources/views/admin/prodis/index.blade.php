@@ -22,9 +22,9 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Prodi" style="width: 100%">
+            <table class=" table table-outline table-striped table-hover datatable datatable-Prodi" style="width: 100%">
                 <thead>
-                    <tr>
+                    <tr class="thead-light">
                         <th class="text-center">
                             {{ trans('cruds.prodi.fields.nama') }}
                         </th>

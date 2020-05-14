@@ -3,12 +3,12 @@
     {!! cui_breadcrumb([
         'Home' => route('admin.home'),
         'Program Studi' => route('admin.prodis.index'),
-        'Create' => '#'
+        'Tambah' => '#'
     ]) !!}
 @stop
 @section('toolbar')
     @can('prodi_view')
-        {!! cui_toolbar_btn(route('admin.prodis.index'), 'icon-list', trans('global.list').' '.trans('cruds.prodi.title_singular') ) !!}
+        {!! cui()->toolbar_btn(route('admin.prodis.index'), 'cil-list', 'List Program Studi') !!}
     @endcan
 @stop
 @section('content')
