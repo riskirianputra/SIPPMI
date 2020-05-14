@@ -7,10 +7,13 @@
     ]) !!}
 @stop
 @section('toolbar')
+    @can('kode_rumpun_manage')
+        {!! cui()->toolbar_delete(route('admin.kode-rumpuns.destroy', $prodi->id), $prodi->id, 'cil-trash', 'Hapus', 'Anda yakin akan menghapus data ini?') !!}
+        {!! cui()->toolbar_btn(route('admin.prodis.edit', $prodi->id), 'cil-pencil', 'Edit') !!}
+        {!! cui()->toolbar_btn(route('admin.prodis.create'), 'cil-plus', 'Tambah') !!}
+    @endcan
     @can('prodi_view')
-        {!! cui_toolbar_btn(route('admin.prodis.index'), 'icon-list', trans('global.list').' '.trans('cruds.prodi.title_singular') ) !!}
-        {!! cui_toolbar_btn(route('admin.prodis.edit',[$prodi->id]), 'icon-pencil', trans('global.edit').' '.trans('cruds.prodi.title_singular') ) !!}
-        {!! cui_toolbar_btn(route('admin.prodis.destroy',[$prodi->id]), 'icon-trash', 'Hapus Program Studi' ) !!}
+        {!! cui()->toolbar_btn(route('admin.prodis.index'), 'cil-list', 'List Program Studi') !!}
     @endcan
 @stop
 @section('content')
