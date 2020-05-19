@@ -19,14 +19,14 @@ class RefSkemaController extends Controller
 
         $refSkemas = RefSkema::all();
 
-        return view('admin.refSkemas.index', compact('refSkemas'));
+        return view('admins.referensis.ref_skemas.index', compact('refSkemas'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('ref_skema_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.refSkemas.create');
+        return view('admins.referensis.ref_skemas.create');
     }
 
     public function store(StoreRefSkemaRequest $request)
@@ -41,7 +41,7 @@ class RefSkemaController extends Controller
 
         abort_if(Gate::denies('ref_skema_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.refSkemas.edit', compact('refSkema'));
+        return view('admins.referensis.ref_skemas.edit', compact('refSkema'));
     }
 
     public function update(UpdateRefSkemaRequest $request, RefSkema $refSkema)
@@ -58,7 +58,7 @@ class RefSkemaController extends Controller
 
         $refSkema->load('skemaOutputSkemas', 'skemaPenelitians', 'skemaPengabdians');
 
-        return view('admin.refSkemas.show', compact('refSkema'));
+        return view('admins.referensis.ref_skemas.show', compact('refSkema'));
     }
 
     public function destroy(RefSkema $refSkema)

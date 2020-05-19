@@ -131,34 +131,15 @@
             </ul>
         </li>
     @endcan
+
     @can('audit_log_access')
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link {{ request()->is('admin/audit-logs') || request()->is('admin/audit-logs/*') ? 'active' : '' }}" href="{{ route("admin.audit-logs.index") }}">
+            <a class="c-sidebar-nav-link {{ request()->is('admin/audit-logs') || request()->is('admin/audit-logs/*') ? 'active' : '' }}"
+               href="{{ route("admin.audit-logs.index") }}">
                 <span class="c-sidebar-nav-icon">
                     <i class="cil-bell"></i>
                 </span>
                 User Alert
-            </a>
-        </li>
-    @endcan
-    @can('manage_penelitian_user')
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link {{ request()->is('penelitians') || request()->is('penelitians/*') ? 'c-active' : '' }}" href="{{ route("penelitians.index") }}">
-                <svg class="c-sidebar-nav-icon">
-                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-school"></use>
-                </svg>
-                Penelitian
-            </a>
-        </li>
-    @endcan
-
-    @can('manage_pengabdian_user')
-        <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link {{ request()->is('pengabdians') || request()->is('pengabdians/*') ? 'active' : '' }}" href="{{ route("pengabdians.index") }}">
-                <svg class="c-sidebar-nav-icon">
-                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-school"></use>
-                </svg>
-                Pengabdian
             </a>
         </li>
     @endcan
@@ -172,7 +153,8 @@
             <ul class="c-sidebar-nav-dropdown-items">
                 @can('penelitian_access')
                     <li class="c-sidebar-nav-item">
-                        <a class="c-sidebar-nav-link {{ request()->is('admin/penelitians') || request()->is('admin/penelitians/*') ? 'active' : '' }}" href="{{ route("admin.penelitians.index") }}">
+                        <a class="c-sidebar-nav-link {{ request()->is('admin/penelitians') || request()->is('admin/penelitians/*') ? 'active' : '' }}"
+                           href="{{ route("admin.penelitians.index") }}">
                             {{ trans('cruds.penelitian.title') }}
                         </a>
                     </li>
@@ -190,11 +172,56 @@
             <ul class="c-sidebar-nav-dropdown-items">
                 @can('penelitian_access')
                     <li class="c-sidebar-nav-item">
-                        <a href="{{ route("admin.pengabdians.index") }}" class="c-sidebar-nav-link {{ request()->is('admin/pengabdians') || request()->is('admin/pengabdians/*') ? 'active' : '' }}">
+                        <a href="{{ route("admin.pengabdians.index") }}"
+                           class="c-sidebar-nav-link {{ request()->is('admin/pengabdians') || request()->is('admin/pengabdians/*') ? 'active' : '' }}">
                             {{ trans('cruds.pengabdian.title') }}
                         </a>
                     </li>
                 @endcan
+            </ul>
+        </li>
+    @endcan
+
+    @can('manage_penelitian_user')
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link {{ request()->is('penelitians') || request()->is('penelitians/*') ? 'c-active' : '' }}"
+               href="{{ route("penelitians.index") }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-school"></use>
+                </svg>
+                Penelitian
+            </a>
+        </li>
+    @endcan
+
+    @can('manage_pengabdian_user')
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link {{ request()->is('pengabdians') || request()->is('pengabdians/*') ? 'active' : '' }}"
+               href="{{ route("pengabdians.index") }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-school"></use>
+                </svg>
+                Pengabdian
+            </a>
+        </li>
+    @endcan
+
+    @can('manage_kinerja_user')
+        <li class="c-sidebar-nav-dropdown">
+            <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                <span class="c-sidebar-nav-icon">
+                    <i class="cil-school"></i>
+                </span>
+                Kinerja
+            </a>
+
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a href="{{ route("pemakalahs.index") }}"
+                       class="c-sidebar-nav-link {{ request()->is('pemakalahs') || request()->is('pemakalahs') ? 'active' : '' }}">
+                        Pemakalah Forum Ilmiah
+                    </a>
+                </li>
             </ul>
         </li>
     @endcan
@@ -204,9 +231,9 @@
     class="c-sidebar-minimizer c-class-toggler"
     type="button"
     data-target="_parent"
-    data-class="c-sidebar-unfoldable"></button>
-
-
+    data-class="c-sidebar-unfoldable"
+>
+</button>
 
 
 {{--            @can('referensi_access')--}}

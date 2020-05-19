@@ -46,7 +46,7 @@ class PengabdianController extends Controller
             ->get()
             ->pluck('nama', 'id');
 
-        if($skemas->count() <= 0){
+        if ($skemas->count() <= 0) {
             $skemas = RefSkema::where('jenis_usulan', Usulan::PENGABDIAN)
                 ->whereAvailable()
                 ->get()
@@ -70,31 +70,31 @@ class PengabdianController extends Controller
     {
         abort_if(Gate::denies('pengabdian_user_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-            // Tambah usulan
-            $usulan = new Usulan();
-            $usulan->pengusul_id = auth()->user()->id;
-            $usulan->status_usulan = 0;
-            $usulan->jenis_usulan = Usulan::PENGABDIAN;
-            $usulan->save();
+        // Tambah usulan
+        $usulan = new Usulan();
+        $usulan->pengusul_id = auth()->user()->id;
+        $usulan->status_usulan = 0;
+        $usulan->jenis_usulan = Usulan::PENGABDIAN;
+        $usulan->save();
 
-            $usulan_id = $usulan->id;
+        $usulan_id = $usulan->id;
 
-            // Tambah data penelitian
-            Pengabdian::create(array_merge($request->all(), ['id' => $usulan->id, 'tahun' => date('Y')]));
+        // Tambah data penelitian
+        Pengabdian::create(array_merge($request->all(), ['id' => $usulan->id, 'tahun' => date('Y')]));
 
-            $pengabdian = Pengabdian::findOrFail($usulan->id);
+        $pengabdian = Pengabdian::findOrFail($usulan->id);
 
-            $this->addFile($pengabdian, $request, 'file_pengesahan', config('sippmi.path.pengesahan'));
-            $this->addFile($pengabdian, $request, 'file_proposal', config('sippmi.path.proposal'));
-            $this->addFile($pengabdian, $request, 'file_cv', config('sippmi.path.cv'));
+        $this->addFile($pengabdian, $request, 'file_pengesahan', config('sippmi.path.pengesahan'));
+        $this->addFile($pengabdian, $request, 'file_proposal', config('sippmi.path.proposal'));
+        $this->addFile($pengabdian, $request, 'file_cv', config('sippmi.path.cv'));
 
-            //Add ketua penelitian
-            $anggota = new UsulanAnggotum();
-            $anggota->tipe = UsulanAnggotum::DOSEN;
-            $anggota->usulan_id = $usulan->id;
-            $anggota->dosen_id = auth()->user()->id;
-            $anggota->jabatan = UsulanAnggotum::KETUA;
-            $anggota->save();
+        //Add ketua penelitian
+        $anggota = new UsulanAnggotum();
+        $anggota->tipe = UsulanAnggotum::DOSEN;
+        $anggota->usulan_id = $usulan->id;
+        $anggota->dosen_id = auth()->user()->id;
+        $anggota->jabatan = UsulanAnggotum::KETUA;
+        $anggota->save();
 
         return redirect()->route('pengabdians.eksekutif', [$usulan->id]);
     }
@@ -130,8 +130,8 @@ class PengabdianController extends Controller
 
 
         Validator::make($data, [
-            'anggota' => 'integer|min:'.$skema->anggota_min.'|max:'.$skema->anggota_max,
-            'anggota_mahasiswa' => 'integer|min:'.$skema->mahasiswa_min.'|max:'.$skema->mahasiswa_max
+            'anggota' => 'integer|min:' . $skema->anggota_min . '|max:' . $skema->anggota_max,
+            'anggota_mahasiswa' => 'integer|min:' . $skema->mahasiswa_min . '|max:' . $skema->mahasiswa_max
         ])->validate();
 
         if ($pengabdian->owner == auth()->user()->id) {
@@ -175,7 +175,7 @@ class PengabdianController extends Controller
             ->get()
             ->pluck('nama', 'id');
 
-        if($skemas->count() <= 0){
+        if ($skemas->count() <= 0) {
             $skemas = RefSkema::where('jenis_usulan', Usulan::PENGABDIAN)
                 ->whereAvailable()
                 ->get()
@@ -216,7 +216,7 @@ class PengabdianController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Pengabdian $pengabdian)

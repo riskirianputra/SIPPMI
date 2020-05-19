@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use phpDocumentor\Reflection\Types\Self_;
 
 class Usulan extends Model
 {
@@ -20,10 +21,14 @@ class Usulan extends Model
 
     const PENELITIAN = 'P';
     const PENGABDIAN = 'PkM';
+    const PEMAKALAH = 'K';
+//    const JURNAL = 'J';
 
     const JENIS_USULAN = [
         self::PENELITIAN => 'Penelitian',
         self::PENGABDIAN => 'Pengabdian kepada Masyarakat',
+        self::PEMAKALAH => 'Pemakalah Seminar',
+//        self::JURNAL => 'Artikel Jurnal'
     ];
 
     protected $fillable = [
@@ -49,17 +54,30 @@ class Usulan extends Model
         return $this->belongsTo(User::class, 'pengusul_id');
     }
 
-    public function anggotas(){
-        return $this->hasMany(UsulanAnggotum::class,'usulan_id','id');
+    public function anggotas()
+    {
+        return $this->hasMany(UsulanAnggotum::class, 'usulan_id', 'id');
     }
 
-    public function penelitian(){
-        return $this->hasOne(Penelitian::class,'id','id');
+    public function penelitian()
+    {
+        return $this->hasOne(Penelitian::class, 'id', 'id');
     }
 
-    public function pengabdian(){
-        return $this->hasOne(Pengabdian::class,'id','id');
+    public function pengabdian()
+    {
+        return $this->hasOne(Pengabdian::class, 'id', 'id');
     }
+
+    public function pemakalah()
+    {
+        return $this->hasOne(Pemakalah::class, 'id', 'id');
+    }
+
+//    public function jurnal()
+//    {
+//        return $this->hasOne(Jurnal::class, 'id', 'id')
+//    }
 
     public function komentars()
     {
@@ -69,21 +87,21 @@ class Usulan extends Model
     public function getFileProposalUrl()
     {
         $folder = config('sippmi.path.proposal');
-        $path = Storage::url($folder.'/'.$this->file_proposal);
+        $path = Storage::url($folder . '/' . $this->file_proposal);
         return $path;
     }
 
     public function getFilePengesahanUrl()
     {
         $folder = config('sippmi.path.pengesahan');
-        $path = Storage::url($folder.'/'.$this->file_pengesahan);
+        $path = Storage::url($folder . '/' . $this->file_pengesahan);
         return $path;
     }
 
     public function getFileCvUrl()
     {
         $folder = config('sippmi.path.cv');
-        $path = Storage::url($folder.'/'.$this->file_cv);
+        $path = Storage::url($folder . '/' . $this->file_cv);
         return $path;
     }
 }

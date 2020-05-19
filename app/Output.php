@@ -23,7 +23,7 @@ class Output extends Model
         'created_at',
         'updated_at',
         'deleted_at',
-        'jenis_usulan_id',
+        'jenis_usulan',
     ];
 
     public function outputOutputSkemas()

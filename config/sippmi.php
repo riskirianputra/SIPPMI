@@ -7,7 +7,10 @@ return [
         'proposal' => 'proposal',
         'kemajuan' => 'kemajuan',
         'logbook' => 'logbook',
-        'lap_akhir' => 'lap_akhir'
+        'lap_akhir' => 'lap_akhir',
+        'kinerja' => [
+            'makalah' => 'kinerja/makalah'
+        ]
     ],
 
     'tipe_pertanyaan' => [

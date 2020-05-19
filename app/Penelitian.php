@@ -121,11 +121,6 @@ class Penelitian extends Model
         return $this->hasMany(UsulanAnggotum::class, 'usulan_id', 'penelitian_id');
     }
 
-
-
-
-
-
     public function skema()
     {
         return $this->belongsTo(RefSkema::class, 'skema_id');

@@ -89,6 +89,22 @@
             </li>
         @endcan
 
+        @can('kinerja_user_manage')
+            <li class="c-sidebar-nav-dropdown">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                <span class="c-sidebar-nav-icon">
+                    <i class="cil-user"></i>
+                </span>
+                    Kinerja
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link" href="{{ route('pemakalahs.index') }}"> Pemakalah Forum Ilmiah</a>
+                    </li>
+                </ul>
+            </li>
+        @endcan
+
         @can('pengelolaan_penelitian_view')
             <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <span class="c-sidebar-nav-icon">

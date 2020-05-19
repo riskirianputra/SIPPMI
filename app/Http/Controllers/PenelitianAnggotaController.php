@@ -29,6 +29,7 @@ class PenelitianAnggotaController extends Controller
         $this->validate($request, UsulanAnggotum::$dosen_validation_rule);
 
         $anggota = new UsulanAnggotum();
+        $anggota->tipe = 1;
         $anggota->usulan_id = $penelitian->id;
         $anggota->dosen_id = $request->get('dosen_id');
         if($anggota->dosen_id == auth()->user()->id){

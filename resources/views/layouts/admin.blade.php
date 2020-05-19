@@ -200,7 +200,7 @@
                 //         columns: ':visible'
                 //     }
                 // }
-            ]
+            // ]
     //     });
     //
     //     $.fn.dataTable.ext.classes.sPageButton = '';

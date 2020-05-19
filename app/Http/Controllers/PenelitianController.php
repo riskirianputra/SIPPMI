@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Api\V1\Admin\UsulanApiController;
-use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyPenelitianRequest;
 use App\Http\Requests\StorePenelitianRequest;
 use App\Http\Requests\UpdatePenelitianRequest;
@@ -13,15 +11,11 @@ use App\PenelitianAnggotum;
 use App\PrnFokus;
 use App\Prodi;
 use App\RefSkema;
-use App\RipTahapan;
 use App\Usulan;
-use App\UsulanAnggota;
 use App\UsulanAnggotum;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Gate;
 use Illuminate\Support\Facades\Validator;
-use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
 class PenelitianController extends Controller

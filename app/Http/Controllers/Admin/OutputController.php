@@ -20,7 +20,7 @@ class OutputController extends Controller
 
         $outputs = Output::all();
 
-        return view('admin.outputs.index', compact('outputs'));
+        return view('admins.referensis.outputs.index', compact('outputs'));
     }
 
     public function create()
@@ -29,14 +29,20 @@ class OutputController extends Controller
 
         $jenis_usulans = JenisUsulan::all()->pluck('nama', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.outputs.create', compact('jenis_usulans'));
+        return view('admins.referensis.outputs.create', compact('jenis_usulans'));
     }
 
     public function store(StoreOutputRequest $request)
     {
         $output = Output::create($request->all());
 
-        return redirect()->route('admin.outputs.index');
+        if($output){
+            notify('success', 'Berhasil menambahkan data output');
+            return redirect()->route('admin.outputs.index');
+        }
+        notify('error', 'Terjadi kegagalan tambah data output');
+        return redirect()->back();
+
     }
 
     public function edit(Output $output)
@@ -47,14 +53,18 @@ class OutputController extends Controller
 
         $output->load('jenis_usulan');
 
-        return view('admin.outputs.edit', compact('jenis_usulans', 'output'));
+        return view('admins.referensis.outputs.edit', compact('jenis_usulans', 'output'));
     }
 
     public function update(UpdateOutputRequest $request, Output $output)
     {
-        $output->update($request->all());
-
-        return redirect()->route('admin.outputs.index');
+        if ($output->update($request->all()))
+        {
+            notify('success', 'Berhasil mengubah data jenis output');
+            return redirect()->route('admin.outputs.index');
+        }
+        notify('error', 'Gagal mengubah data jenis output');
+        return redirect()->back();
     }
 
     public function show(Output $output)
@@ -63,22 +73,19 @@ class OutputController extends Controller
 
         $output->load('jenis_usulan', 'outputOutputSkemas');
 
-        return view('admin.outputs.show', compact('output'));
+        return view('admins.referensis.outputs.show', compact('output'));
     }
 
     public function destroy(Output $output)
     {
         abort_if(Gate::denies('output_manage'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $output->delete();
-
+        if($output->delete()){
+            notify('success', 'Berhasil menghapud data jenis output');
+        }else{
+            notify('error', 'Gagal menghapus data jenis output');
+        }
         return back();
     }
 
-    public function massDestroy(MassDestroyOutputRequest $request)
-    {
-        Output::whereIn('id', request('ids'))->delete();
-
-        return response(null, Response::HTTP_NO_CONTENT);
-    }
 }

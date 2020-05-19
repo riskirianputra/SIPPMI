@@ -22,9 +22,8 @@ class UpdateOutputRequest extends FormRequest
             'code'            => [
                 'required',
             ],
-            'jenis_usulan_id' => [
+            'jenis_usulan' => [
                 'required',
-                'integer',
             ],
             'luaran'          => [
                 'required',

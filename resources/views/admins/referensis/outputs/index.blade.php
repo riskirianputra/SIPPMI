@@ -9,10 +9,10 @@
 @stop
 @section('toolbar')
     @can('ref_skema_manage')
-        {!! cui_toolbar_btn(route('admin.ref-skemas.index'), 'icon-list', trans('global.list').' '.trans('cruds.refSkema.title_singular') ) !!}
+        {!! cui_toolbar_btn(route('admin.ref-skemas.index'), 'cil-list', 'List Skema')!!}
     @endcan
     @can('output_manage')
-        {!! cui_toolbar_btn(route('admin.outputs.create'), 'icon-plus', trans('global.add').' '.trans('cruds.output.title_singular') ) !!}
+        {!! cui_toolbar_btn(route('admin.outputs.create'), 'cil-plus', 'Tambah Output') !!}
     @endcan
 @stop
 @section('content')
@@ -23,12 +23,9 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Output" style="width: 100%">
-                <thead>
+            <table class=" table table-outline table-striped table-hover datatable datatable-Output" style="width: 100%">
+                <thead class="thead-light">
                     <tr>
-                        <th width="10">
-
-                        </th>
                         <th>
                             {{ trans('cruds.output.fields.id') }}
                         </th>
@@ -41,8 +38,8 @@
                         <th>
                             {{ trans('cruds.output.fields.luaran') }}
                         </th>
-                        <th>
-                            &nbsp;
+                        <th class="text-center">
+                            <i class="cil-options"></i>
                         </th>
                     </tr>
                 </thead>
@@ -50,28 +47,25 @@
                     @foreach($outputs as $key => $output)
                         <tr data-entry-id="{{ $output->id }}">
                             <td>
-
-                            </td>
-                            <td>
                                 {{ $output->id ?? '' }}
                             </td>
                             <td>
                                 {{ $output->code ?? '' }}
                             </td>
                             <td>
-                                {{ $output->jenis_usulan->nama ?? '' }}
+                                {{ $output->jenis_usulan ? App\Usulan::JENIS_USULAN[$output->jenis_usulan] : '' }}
                             </td>
                             <td>
                                 {{ $output->luaran ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 @can('output_view')
-                                    {!! cui_btn_view(route('admin.outputs.show', [$output->id])) !!}
+                                    {!! cui()->btn_view(route('admin.outputs.show', [$output->id])) !!}
                                 @endcan
 
                                 @can('ref_skema_manage')
-                                    {!! cui_btn_edit(route('admin.outputs.edit', [$output->id])) !!}
-                                    {!! cui_btn_delete(route('admin.outputs.destroy', [$output->id]), "Anda yakin akan menghapus data output ini?") !!}
+                                    {!! cui()->btn_edit(route('admin.outputs.edit', [$output->id])) !!}
+                                    {!! cui()->btn_delete(route('admin.outputs.destroy', [$output->id]), "Anda yakin akan menghapus data output ini?") !!}
                                 @endcan
 
                             </td>

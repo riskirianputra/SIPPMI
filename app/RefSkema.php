@@ -32,6 +32,12 @@ class RefSkema extends Model
         return $this->hasMany(RefSkemaQuestion::class);
     }
 
+    public function outputs()
+    {
+        return $this->belongsToMany(Output::class, 'output_skemas', 'skema_id', 'output_id')
+            ->withPivot('id', 'field', 'mime', 'required');
+    }
+
 
     /** LEGACY CODE BELOW */
 
