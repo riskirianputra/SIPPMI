@@ -20,7 +20,7 @@
             <div class="col-sm-8">
                 <div class="card">
 
-                    {{ html()->modelForm($tahapanReview, 'PUT', route('admin.tahapan-reviews.update', [$tahapanReview->id])) }}
+                    {{ html()->modelForm($tahapanReview, 'PUT', route('admin.tahapan-reviews.update', [$tahapanReview->id]))->open() }}
 
                     <div class="card-header">
                         Edit Tahapan Review
