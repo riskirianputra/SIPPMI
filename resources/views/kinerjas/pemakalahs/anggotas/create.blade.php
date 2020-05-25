@@ -3,14 +3,14 @@
 @section('breadcrumb')
     {!! cui_breadcrumb([
         'Home' => url('home'),
-        'Penelitian' => route('penelitians.index'),
-        'Edit' => '#'
+        'Pemakalah' => route('pemakalahs.index'),
+        'Anggota' => '#'
     ]) !!}
 @endsection
 
 @section('toolbar')
-    @can('manage_penelitian_user')
-        {!! cui_toolbar_btn(route('penelitians.index'), 'icon-list', 'List Penelitian') !!}
+    @can('kinerja_user_manage')
+        {!! cui_toolbar_btn(route('pemakalahs.index'), 'cil-list', 'List Pemakalah') !!}
     @endcan
 @endsection
 
@@ -75,7 +75,7 @@
         <div class="col-md-12">
             <ul class="step-progressbar">
                 <li class="step-progressbar__item step-progressbar__item--complete"><a
-                        href="{{ route('penelitians.edit', [$penelitian->id]) }}">Makalah</a></li>
+                        href="{{ route('pemakalahs.edit', [$pemakalah->id]) }}">Makalah</a></li>
                 <li>
                 <li class="step-progressbar__item step-progressbar__item--active">Penulis</li>
                 <li class="step-progressbar__item">Submit</li>
@@ -115,7 +115,7 @@
                         </thead>
                         <tbody>
                         <form method="POST"
-                              action="{{ route("penelitian.anggota.store", [$penelitian->id]) }}"
+                              action="{{ route("pemakalah.anggota.store", [$pemakalah->id]) }}"
                               enctype="multipart/form-data"
                               class="form form-inline">
                             @csrf
@@ -137,7 +137,7 @@
                                 </td>
                             </tr>
                         </form>
-                        @foreach($penelitian->usulan->anggotas->filter(function ($value,$key){return $value->tipe == 1;}) as $anggota)
+                        @foreach($pemakalah->authors->filter(function ($value,$key){return $value->tipe == 1;}) as $anggota)
                             <tr>
                                 <td>
                                     {{ optional($anggota->dosen)->nama }} <br>
@@ -151,12 +151,12 @@
                                 </td>
                                 <td class="text-center">
                                     @if(isset($anggota->jabatan))
-                                        {{ \App\PenelitianAnggotum::JABATAN_SELECT[$anggota->jabatan] }}
+                                        {{ \App\UsulanAnggotum::AUTHORS_SELECT[$anggota->jabatan] }}
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    @if($penelitian->owner != $anggota->dosen_id)
-                                        {!! cui()->btn_delete(route('penelitian.anggota.destroy', [$penelitian->id, $anggota->id]), trans('global.areYouSure')) !!}
+                                    @if($pemakalah->owner != $anggota->dosen_id)
+                                        {!! cui()->btn_delete(route('pemakalah.anggota.destroy', [$pemakalah->id, $anggota->id]), trans('global.areYouSure')) !!}
                                     @endif
                                 </td>
                             </tr>
@@ -169,7 +169,7 @@
 {{--            form mahasiswa--}}
             <div class="form-group row">
                 <label for="file_proposal" class="col-sm-2 col-form-label">
-                    <strong>Mahasiswa</strong>
+                    <strong>Mahasiswa/ Luar UNAND</strong>
                 </label>
                 <div class="col-sm-10">
 
@@ -186,7 +186,7 @@
                         </thead>
                         <tbody>
                         <form method="POST"
-                              action="{{ route("penelitian.anggota-mahasiswa.store", [$penelitian->id]) }}"
+                              action="{{ route("pemakalah.anggota-mahasiswa.store", [$pemakalah->id]) }}"
                               enctype="multipart/form-data"
                               class="form form-inline">
                             @csrf
@@ -198,23 +198,14 @@
                                     {!! html()->text('identifier')->placeholder('NIM')->class(['form-control']) !!}
                                 </td>
                                 <td>
-                                    <select
-                                        class="custom-select select2 my-1 mr-sm-2 {{ $errors->has('unit') ? 'is-invalid' : '' }}"
-                                        name="unit" id="unit">
-
-                                        @foreach($prodis as $id => $prodi)
-                                            <option
-                                                value="{{ $prodi }}" {{ old('unit') == $id ? 'selected' : '' }}>{{ $prodi }}</option>
-                                        @endforeach
-
-                                    </select>
+                                   {!! html()->text('unit')->placeholder('Prodi/Instansi')->class(['form-control']) !!}
                                 </td>
                                 <td colspan="2">
                                     <button class="btn btn-danger btn-block" type="submit">Tambah Anggota</button>
                                 </td>
                             </tr>
                         </form>
-                        @foreach($penelitian->usulan->anggotas->filter(function ($value,$key){return $value->tipe == 2;}) as $anggota)
+                        @foreach($pemakalah->authors->filter(function ($value,$key){return $value->tipe == 2;}) as $anggota)
                             <tr>
                                 <td>
                                     {{ optional($anggota)->nama }}
@@ -229,8 +220,8 @@
 {{--                                    {{ optional($anggota->dosen->prodi)->nama }}--}}
                                 </td>
                                 <td class="text-center">
-                                    @if($penelitian->owner != $anggota->dosen_id)
-                                        {!! cui()->btn_delete(route('penelitian.anggota.destroy', [$penelitian->id, $anggota->id]), trans('global.areYouSure')) !!}
+                                    @if($pemakalah->owner != $anggota->dosen_id)
+                                        {!! cui()->btn_delete(route('pemakalah.anggota.destroy', [$pemakalah->id, $anggota->id]), trans('global.areYouSure')) !!}
                                     @endif
                                 </td>
                             </tr>
@@ -243,8 +234,8 @@
         </div>
 
         <div class="card-footer">
-            <a href="{{ route('penelitians.eksekutif', $penelitian) }}" class="btn btn-danger">Kembali</a>
-            <a href="{{ route('penelitians.review', $penelitian->id) }}" class="btn btn-primary">Selanjutnya</a>
+            <a href="{{ route('pemakalahs.edit', $pemakalah) }}" class="btn btn-danger">Kembali</a>
+            <a href="{{ route('pemakalahs.review', $pemakalah->id) }}" class="btn btn-primary">Selanjutnya</a>
         </div>
     </div>
 

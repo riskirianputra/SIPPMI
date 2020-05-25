@@ -15,7 +15,7 @@
 <!-- Text Field Input for Tahun Seminar -->
 <div class="form-group">
     <label class="form-label" for="tahun">Tahun Seminar</label>
-    {{ html()->text('tahun')->class(["form-control", "is-invalid" => $errors->has('tahun')])->id('tahun')->placeholder('Tahun Forum Ilmiah diselenggarakan') }}
+    {{ html()->select('tahun', $tahuns)->class(["form-control", "is-invalid" => $errors->has('tahun')])->id('tahun')->placeholder("-- Pilih Tahun --") }}
     @error('tahun')
     <div class="invalid-feedback">{{ $errors->first('tahun') }}</div>
     @enderror

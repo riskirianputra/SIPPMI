@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Dosen;
 use App\Pemakalah;
 use App\UsulanAnggotum;
 use Illuminate\Http\Request;
 
 class PemakalahAnggotaController extends Controller
 {
+
     public function create(Pemakalah $pemakalah)
     {
-        $anggotas = $pemakalah->anggotas()->tipe(1)->pluck('dosen_id', 'dosen_id')->toArray();
+        $anggotas = $pemakalah->authors()->tipe(1)->pluck('dosen_id', 'dosen_id')->toArray();
         $dosens = Dosen::whereNotIn('id', $anggotas)
             ->get()
             ->pluck('nama_nidn', 'id');
 
-        return view('kinerjas.pemakalahs.anggota.create', compact('pemakalah', 'dosens'));
+        return view('kinerjas.pemakalahs.anggotas.create', compact('pemakalah', 'dosens'));
     }
 
     public function store(Request $request, Pemakalah $pemakalah)
@@ -33,7 +35,7 @@ class PemakalahAnggotaController extends Controller
         }
         $anggota->save();
 
-        return redirect()->route('penelitian.anggota.create', [$pemakalah]);
+        return redirect()->route('pemakalah.anggota.create', [$pemakalah]);
     }
 
     public function mahasiswaStore(Request $request, $id){

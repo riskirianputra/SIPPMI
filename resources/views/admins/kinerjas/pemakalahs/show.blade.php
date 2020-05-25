@@ -3,16 +3,13 @@
 @section('breadcrumb')
     {!! cui_breadcrumb([
         'Home' => url('home'),
-        'Kinerja' => route('pemakalahs.index'),
-        'Pemakalah' => route('pemakalahs.index'),
-        'Tambah' => '#'
+        'Pemakalah' => route('admin.pemakalahs.index'),
+        'Detail' => '#'
     ]) !!}
 @endsection
 
 @section('toolbar')
-    @can('kinerja_user_manage')
-        {!! cui_toolbar_btn(route('pemakalahs.index'), 'cil-list', 'List Makalah') !!}
-    @endcan
+    {!! cui_toolbar_btn(route('admin.pemakalahs.index'), 'cil-list', 'List Makalah') !!}
 @endsection
 
 @section('content')

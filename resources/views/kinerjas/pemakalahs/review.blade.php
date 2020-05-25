@@ -3,20 +3,19 @@
 @section('breadcrumb')
     {!! cui_breadcrumb([
         'Home' => url('home'),
-        'Kinerja' => route('pemakalahs.index'),
-        'Pemakalah' => route('pemakalahs.index'),
-        'Edit' => '#'
+        'Makalah' => route('pemakalahs.index'),
+        'Review' => '#'
     ]) !!}
 @endsection
 
 @section('toolbar')
-    {!! cui_toolbar_btn(route('pemakalahs.index'), 'cil-list', 'List Makalah') !!}
+    @can('kinerja_user_manage')
+        {!! cui_toolbar_btn(route('pemakalahs.index'), 'cil-list', 'List Makalah') !!}
+    @endcan
 @endsection
 
 @section('styles')
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <style>
-
         .step-progressbar {
             list-style: none;
             counter-reset: step;
@@ -75,11 +74,11 @@
     <div class="row">
         <div class="col-md-12">
             <ul class="step-progressbar">
-                <li class="step-progressbar__item step-progressbar__item--active">
-                    <a href="#">Makalah</a>
+                <li class="step-progressbar__item step-progressbar__item--complete">
+                    <a href="{{ route('pemakalahs.edit', [$pemakalah->id]) }}">Informasi Dasar</a>
                 </li>
-                <li class="step-progressbar__item">
-                    <a href="#">Penulis</a>
+                <li class="step-progressbar__item step-progressbar__item--complete">
+                    <a href="{{ route('pemakalah.anggota.create', [$pemakalah->id]) }}">Peneliti</a>
                 </li>
                 <li class="step-progressbar__item">Submit</li>
             </ul>
@@ -87,47 +86,42 @@
     </div>
 
     <div class="card">
-
-        {{ html()->modelForm($pemakalah, 'POST', route('pemakalahs.update', [$pemakalah->id]))->acceptsFiles()->open() }}
-
         <div class="card-header font-weight-bold">
-            <i class="cil-plus"></i> Tambah Makalah
+            Informasi Detail Usulan Penelitian
         </div>
 
         <div class="card-body">
-            @include('kinerjas.pemakalahs._form')
+
+            @include('kinerjas.pemakalahs._info')
+
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <strong>Peneliti</strong>
+                </div>
+                <div class="col-sm-10">
+                    @include('kinerjas.pemakalahs.anggotas._info')
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <strong>Mahasiswa</strong>
+                </div>
+                <div class="col-sm-10">
+                    @include('kinerjas.pemakalahs.anggotas._mahasiswa')
+                </div>
+            </div>
+
         </div>
 
         <div class="card-footer">
-            <button class="btn btn-primary" type="submit">
-                Selanjutnya
-            </button>
-        </div>
 
-        {{ html()->closeModelForm() }}
+            <form action="{{ route('pemakalahs.submit', $pemakalah->id) }}" method="POST">
+                @csrf
+                <a href="{{ route('pemakalah.anggota.create', $pemakalah) }}" class="btn btn-danger">Kembali</a>
+                <button type="submit" class="btn-success btn">Submit Makalah</button>
+            </form>
+        </div>
     </div>
 
-@endsection
-
-@section('scripts')
-    <script>
-        $(document).ready(function () {
-            var quill = new Quill('#editor', {
-                theme: 'snow',   // Specify theme in configuration
-                modules: {
-                    toolbar: ['bold', 'italic', 'underline']
-                }
-            });
-
-            var editor = document.getElementById('editor').getElementsByClassName('ql-editor')[0];
-            var inputJudul = document.getElementById("judul");
-            var text = "";
-
-            quill.on('text-change', function () {
-                text = editor.innerHTML;
-                console.log(text);
-                inputJudul.value = text;
-            })
-        });
-    </script>
 @endsection

@@ -94,7 +94,6 @@
                                        {{ $penelitian->statusText }}
                                     </span>
                                 </h5>
-
                             </td>
                             <td class="text-center">
                                 {!! cui()->btn_view(route('penelitians.show', $penelitian->id)) !!}

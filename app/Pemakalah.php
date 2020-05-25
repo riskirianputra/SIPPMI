@@ -25,7 +25,7 @@ class Pemakalah extends Model
     const PEMAKALAH = 1;
     const KEYNOTE_SPEAKER = 2;
     const STATUS_PEMAKALAH = [
-        self::PEMAKALAH => 'Pemakalah',
+        self::PEMAKALAH => 'Pemakalah Biasa',
         self::KEYNOTE_SPEAKER => 'Invited/Keynote Speaker',
     ];
 
@@ -39,10 +39,9 @@ class Pemakalah extends Model
     ];
 
     /** RELATIONSHIP */
-    public function first_author()
+    public function usulan()
     {
-        return $this->hasManyThrough(UsulanAnggotum::class, Usulan::class, 'id', 'usulan_id', 'id', 'id')
-            ->where('jabatan', 1);
+        return $this->belongsTo(Usulan::class, 'id', 'id');
     }
 
     public function authors()
@@ -76,4 +75,24 @@ class Pemakalah extends Model
         return $this->usulan->pengusul_id;
     }
 
+    public function getJudulSimpleAttribute($value){
+        $judul = str_replace('<p>', '', $this->judul);
+        $judul = str_replace('</p>', '', $judul);
+        return $judul;
+    }
+
+    public function getJudulTextAttribute($value)
+    {
+        return strip_tags($this->judul);
+    }
+
+    public function getStatusPemakalahTextAttribute($value)
+    {
+        return data_get(self::STATUS_PEMAKALAH, $this->status_pemakalah, '-');
+    }
+
+    public function getFirstAuthorAttribute($value)
+    {
+        return $this->authors->where('jabatan', UsulanAnggotum::PENULIS_PERTAMA)->first();
+    }
 }

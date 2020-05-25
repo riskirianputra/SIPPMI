@@ -31,7 +31,7 @@ Route::get('pemakalah/{pemakalah}/review', 'PemakalahController@review')->name('
 
 Route::resource('pemakalahs', 'PemakalahController');
 Route::resource('pemakalah.anggota', 'PemakalahAnggotaController');
-Route::post('pemakalahs/{id}/anggota/mahasiswa-store', 'PemakalahAnggotaController@mahasiswaStore')->name('pemakalahs.anggota-mahasiswa.store');
+Route::post('pemakalahs/{id}/anggota/mahasiswa-store', 'PemakalahAnggotaController@mahasiswaStore')->name('pemakalah.anggota-mahasiswa.store');
 
 /** REVIEW PENELITIAN */
 Route::get('review-penelitians', 'ReviewPenelitianController@index')->name('review-penelitians.index');

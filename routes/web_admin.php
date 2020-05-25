@@ -41,6 +41,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('pengabdians/ckmedia', 'PengabdianController@storeCKEditorImages')->name('pengabdians.storeCKEditorImages');
     Route::resource('pengabdians', 'PengabdianController');
 
+    // Kinerja - Pemakalah
+    Route::post('pemakalah/filter', 'PemakalahController@filter')->name('pemakalahs.filter');
+    Route::resource('pemakalahs', 'PemakalahController');
+
 // Dosens
     Route::delete('dosens/destroy', 'DosenController@massDestroy')->name('dosens.massDestroy');
     Route::resource('dosens', 'DosenController');

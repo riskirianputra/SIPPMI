@@ -12,7 +12,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($penelitian->usulan->anggotas->filter(function ($value,$key){return $value->tipe == 1;}) as $anggota)
+    @foreach($pemakalah->authors->filter(function ($value,$key){return $value->tipe == 1;}) as $anggota)
         <tr>
             <td>
                 {{ optional($anggota->dosen)->nama }} <br>
@@ -26,7 +26,7 @@
             </td>
             <td >
                 @if(isset($anggota->jabatan))
-                    {{ \App\PenelitianAnggotum::JABATAN_SELECT[$anggota->jabatan] }}
+                    {{ \App\UsulanAnggotum::AUTHORS_SELECT[$anggota->jabatan] }}
                 @endif
             </td>
         </tr>

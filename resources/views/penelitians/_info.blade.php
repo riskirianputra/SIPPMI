@@ -9,7 +9,6 @@
     </div>
 </div>
 
-
 <div class="form-group row">
     <div class="col-sm-2">
         <strong>Status Penelitian</strong>

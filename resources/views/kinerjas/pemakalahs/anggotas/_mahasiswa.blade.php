@@ -7,11 +7,11 @@
         <th >
             NIM
         </th>
-        <th scope="col" >Prodi</th>
+        <th scope="col" >Instansi</th>
     </tr>
     </thead>
     <tbody>
-    @foreach($penelitian->usulan->anggotas->filter(function ($value,$key){return $value->tipe == 2;}) as $anggota)
+    @foreach($pemakalah->authors->filter(function ($value,$key){return $value->tipe == 2;}) as $anggota)
         <tr>
             <td>
                 {{ optional($anggota)->nama }} <br>

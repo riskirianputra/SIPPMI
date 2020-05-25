@@ -39,9 +39,8 @@
                     <tr>
                         <td>{!! $makalah->judulSimple ?? "" !!}</td>
                         <td>
-                            {{ $makalah->penyelenggara }}
-                            {{ $makalah->tanggal_mulai }} s/d {{ $makalah->tanggal_selesai }}
-                            {{ $makalah->tempat }}
+                            {{ $makalah->penyelenggara }}<br>
+                            {{ $makalah->tempat }}, {{ $makalah->tanggal_mulai }} s/d {{ $makalah->tanggal_selesai }}
                         </td>
                         <td>
                             {{ $makalah->status_pemakalah_text }}
@@ -54,10 +53,10 @@
                             @endif
                         </td>
                         <td class="text-center">
-                            {!! cui()->btn_view(route('makalahs.show', $makalah->id)) !!}
+                            {!! cui()->btn_view(route('pemakalahs.show', $makalah->id)) !!}
                             @if($makalah->owner == auth()->user()->id)
-                                {!! cui()->btn_edit(route('makalahs.edit', $makalah->id)) !!}
-                                {!! cui()->btn_delete(route('makalahs.destroy', $makalah->id), trans('global.areYouSure')) !!}
+                                {!! cui()->btn_edit(route('pemakalahs.edit', $makalah->id)) !!}
+                                {!! cui()->btn_delete(route('pemakalahs.destroy', $makalah->id), trans('global.areYouSure')) !!}
                             @endif
                         </td>
                     </tr>

@@ -54,17 +54,17 @@
                 </ul>
             </li>
         @endcan
-        @can('audit_log_view')
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link {{ request()->is('admin/audit-logs') || request()->is('admin/audit-logs/*') ? 'active' : '' }}"
-                   href="{{ route("admin.audit-logs.index") }}">
-                <span class="c-sidebar-nav-icon">
-                    <i class="cil-bell"></i>
-                </span>
-                    User Alert
-                </a>
-            </li>
-        @endcan
+{{--        @can('audit_log_view')--}}
+{{--            <li class="c-sidebar-nav-item">--}}
+{{--                <a class="c-sidebar-nav-link {{ request()->is('admin/audit-logs') || request()->is('admin/audit-logs/*') ? 'active' : '' }}"--}}
+{{--                   href="{{ route("admin.audit-logs.index") }}">--}}
+{{--                <span class="c-sidebar-nav-icon">--}}
+{{--                    <i class="cil-bell"></i>--}}
+{{--                </span>--}}
+{{--                    User Alert--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--        @endcan--}}
         @can('penelitian_user_manage')
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{ request()->is('penelitians') || request()->is('penelitians/*') ? 'c-active' : '' }}"
@@ -139,6 +139,26 @@
                             </a>
                         </li>
                     @endcan
+                </ul>
+            </li>
+        @endcan
+
+        @can('kinerja_view')
+            <li class="c-sidebar-nav-dropdown">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                <span class="c-sidebar-nav-icon">
+                    <i class="cil-school"></i>
+                </span>
+                    Kinerja
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    <li class="c-sidebar-nav-item">
+                        <a href="{{ route("admin.pemakalahs.index") }}"
+                           class="c-sidebar-nav-link {{ request()->is('admin/pemakalahs') || request()->is('admin/pemakalahs/*') ? 'active' : '' }}"
+                        >
+                            Pemakalah
+                        </a>
+                    </li>
                 </ul>
             </li>
         @endcan

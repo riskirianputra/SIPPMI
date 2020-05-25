@@ -10,8 +10,6 @@
 @endsection
 
 @section('toolbar')
-    {!! cui()->toolbar_edit(route('pemakalahs.edit', [$makalah->id]), 'cil-pencil', 'Edit') !!}
-    {!! cui()->toolbar_delete(route('pemakalahs.destroy', [$makalah->id]), $makalah->id, 'cil-trash', 'Anda yakin akan menghapus makalah ini?') !!}
     {!! cui_toolbar_btn(route('pemakalahs.index'), 'cil-list', 'List Makalah') !!}
 @endsection
 
@@ -78,10 +76,10 @@
         <div class="row">
             <div class="col-md-12">
                 <ul class="step-progressbar">
-                    <li class="step-progressbar__item step-progressbar__item--complete">
-                        <a href="{{ route('pemakalahs.edit', [$makalah->id]) }}">Makalah</a>
-                    </li>
                     <li class="step-progressbar__item step-progressbar__item--active">
+                        <a href="#">Makalah</a>
+                    </li>
+                    <li class="step-progressbar__item">
                         <a href="#">Penulis</a>
                     </li>
                     <li class="step-progressbar__item">Submit</li>

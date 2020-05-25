@@ -16,6 +16,9 @@ class UsulanAnggotum extends Model
     const KETUA = 1;
     const ANGGOTA = 2;
 
+    //Konstanta Author
+    const PENULIS_PERTAMA = 11;
+    const PENULIS_PENDAMPING = 12;
 
     const TIPE_SELECT = [
         self::DOSEN => 'Dosen',
@@ -24,6 +27,10 @@ class UsulanAnggotum extends Model
     const JABATAN_SELECT = [
         self::KETUA => 'Ketua',
         self::ANGGOTA => 'Anggota',
+    ];
+    const AUTHORS_SELECT = [
+        self::PENULIS_PERTAMA => 'Penulis Pertama',
+        self::PENULIS_PENDAMPING => 'Penulis Pendamping'
     ];
 
     protected $table = 'usulan_anggota';
