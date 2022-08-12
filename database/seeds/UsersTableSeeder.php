@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
                 'username' => 'superadmin',
                 'name' => 'Admin',
                 'email' => 'admin@admin.com',
-                'password' => '$2y$10$u19vPvVN/DnMqyrj5K0CzONZ8gyzZ1gDZYPFa8YbXT3iwP9RqKDGG',
+                'password' => bcrypt('admin'),
                 'remember_token' => null,
             ],
         ];
